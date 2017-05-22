@@ -1,0 +1,123 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="title text-center">{{school_class.name}}</h3>
+                <span class="percentage_class">{{school_class.get_percentage_completed}}</span>%
+                            <!-- Progress Bar -->
+                            <div class="progress progress-striped ">
+                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width: {{school_class.get_percentage_completed}}%">
+                                <span class="sr-only">{{school_class.get_percentage_completed}}% Complete</span>
+                              </div>
+                            </div>
+                <br />
+                <div class="nav-center">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons" role="tablist">
+                        <!--
+            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+        -->
+
+
+                        {% for step in school_class.get_published_steps %}
+                        <li class="{% if forloop.first %}active{% endif %}">
+                            <a   href="#step{{step.id}}"  role="tab" data-toggle="tab">
+                                <i class="material-icons">info</i> Lesson {{ forloop.counter }}) {{step.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+
+
+                    </ul>
+                </div>
+                <div class="tab-content">
+
+                
+
+                    {% for step in school_class.get_published_steps %}
+                    <div class="tab-pane {% if forloop.first %}active{% endif %}" id="step{{step.id}}" id="description-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">{{step.name}}</h4>
+                                <p class="category">
+                                    {{step.description}}
+                                </p>
+                            </div>
+                            <!-- <div class="card-content">
+                                {{step.description}}
+                            </div> -->
+
+                            {% for video in step.videos.all %}
+
+                            <label onclick="mark_video_watched({{video.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
+                                <input name="optionsCheckboxes" type="checkbox">
+                                <span class="checkbox-material"><span class="check"></span></span>
+                            </label>                            
+
+                              <a class="video_modal_link"  data-toggle="modal" data-target="#video{{video.id}}" href="" onclick="loadVideo({{video.id}})">
+                                <p>
+
+                                    <i class="fa fa-video-camera fa-fw"></i>
+                                    {{video.name}}
+                                </p>
+                              </a><br>
+                              <!-- <video width="320" height="240" controls>
+                                <source src="{{video.file.url}}" type="video/mp4">
+                                <source src="{{video.file.url}}" type="video/webm">
+                                Your browser does not support the video tag.
+                              </video>
+                              <br> -->
+
+                                <!-- Video Modal -->    
+                                <div class="modal fade myModal" id="video{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">{{video.name}}</h4>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <!-- <video width="320" height="240" controls>
+                                                    <source src="{{video.file.url}}" type="video/mp4">
+                                                    <source src="{{video.file.url}}" type="video/webm">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                <br> -->
+
+                                                
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Video Modal -->
+
+
+                            
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

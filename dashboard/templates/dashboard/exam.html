@@ -1,0 +1,118 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load app_filters %}F
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+
+        <!-- First Row  -->
+        <div class="col-md-12">
+               <h2>
+               Exam
+               {% if exam_paper.is_turned_in %}
+               Score: {{ exam_paper.get_score  }}
+               {% else %}
+               <!--  -->
+               {% endif %}
+               </h2>   
+                  <h5>Please answer the questions below.</h5>
+                  
+
+
+                   {% if exam.get_questions %}
+                     <!-- a hidden input to tell saveAnswer function in main.js
+                          what the url to send answers to -->
+                     <span id="save_answer_span" >
+                       <input type="hidden" value="save_answer/" id="save_answer_url" name="answer_url">
+                       {% csrf_token %}
+                       {% for question in exam.get_questions %}
+                        <div id="question{{question.id}}" class="panel panel-default">
+                            <div class="panel-heading">
+                            {{forloop.counter}}) {{question.question}}
+
+                            <!-- Selected Answer is showed here -->
+                            <!-- I added comment tags to get rid of white spaces between django tags. stupid, but eh. -->
+                            <span id="saved_answer{{question.id}}" class="label label-success"><!-- 
+                             -->{% for answer in question.get_answers %}<!-- 
+                               -->{% for selection in exam_paper.selections.all %}<!-- 
+                               -->{% if answer == selection.answer %}<!-- 
+                               -->{{ answer.answer }}<!-- 
+                               -->{% endif %}<!-- 
+                               -->{% endfor %}<!-- 
+                             -->{% endfor %}<!-- 
+                             --></span>
+
+                            <!-- Questio Image if it exists -->
+                            {% if question.image %}
+                            <br><a href="{{ question.image.image.url }}"><img class="question_image" src="{{ question.image.image.url }}"></a>
+                            {% endif %}
+
+
+                            </div>
+                            <!-- On click the answer will be saved using saveAnswer function
+                                 of main.js. -->
+                            <div class="answer_body panel-body">
+
+                                {% for answer in question.get_answers %}
+                                   <span class="an_answer my_pointer" onclick="saveAnswer({{answer.id}}, {{exam_paper.id}}, {{question.id}})" id="answer{{answer.id}}">
+                                   {{forloop.counter | to_char}}) - {{answer.answer}}
+                                   </span></br></br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                      </span>
+                      {% endfor %}
+                    {% endif %}
+                 
+              </div>
+        <!-- End First Row -->
+
+        <!-- Second Row -->
+<!--         <div class="row">
+            <div class="card">
+                <div class="card-header" data-background-color="orange">
+                    <h4 class="card-title">Question Number 1</h4>
+                    <p class="category">A Book class is to be written, containing the following data fields: age , which will be initialized to 0 when an Book is constructed. nextAvailableID , which will be initialized to 0 outside the constructor and in- cremented each time a Book is constructed. idNum , which will be initialized to the current value of nextAvailableID when a Book is constructed. position , which will be initialized to the shelf location in a bookstore where the Book is placed when it is constructed. direction , which will be initialized to the direction the Book is facing when placed in the shelf. Which variable in the Book class should be static? (C) idNum (D) position (E) direction </p>
+                </div>
+                <div class="card-content">
+
+
+                    <div class="answer_body panel-body">
+                                                    
+                       <span class="an_answer my_pointer" onclick="saveAnswer(109, 32, 29)" id="answer109">
+                       a) - idNum
+                       </span><br><br>
+
+                       <span class="an_answer my_pointer" onclick="saveAnswer(110, 32, 29)" id="answer110">
+                       b) - position
+                       </span><br><br>
+
+                       <span class="an_answer my_pointer" onclick="saveAnswer(107, 32, 29)" id="answer107">
+                       c) - nextAvailableID
+                       </span><br><br>
+
+                       <span class="an_answer my_pointer" onclick="saveAnswer(108, 32, 29)" id="answer108">
+                       d) - age
+                       </span><br><br>
+
+                       <span class="an_answer my_pointer" onclick="saveAnswer(111, 32, 29)" id="answer111">
+                       e) - direction
+                       </span><br><br>
+                                                    
+                    </div>
+
+
+                </div>
+            </div>
+        </div> -->
+        <!-- End Second Row -->
+
+
+    </div>
+</div>
+
+{% endblock %}
+
+

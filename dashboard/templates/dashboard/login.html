@@ -1,0 +1,44 @@
+{% extends 'dashboard/login_register_base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block data_image %} data-image="{% static 'dashboard/img/register.jpeg' %}" {% endblock %}
+
+{% block login_nav_class %}active{% endblock %}
+
+{% block login_register_form %}
+<form action="{% url 'dashboard:login' %}" method="post">
+    {% csrf_token %}
+    <div class="card card-login card-hidden">
+        <div class="card-header text-center" data-background-color="rose">
+            <h4 class="card-title">Login</h4>
+            
+        </div>
+        
+        <div class="card-content">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">face</i>
+                </span>
+                <div class="form-group label-floating">
+                    <label class="control-label">Username</label>
+                    {{ form.username|attr:"class:form-control"  }}
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">lock_outline</i>
+                </span>
+                <div class="form-group label-floating">
+                    <label class="control-label">Password</label>
+                    {{ form.password|attr:"class:form-control"  }}
+                </div>
+            </div>
+        </div>
+        <div class="footer text-center">
+            <button type="submit" class="btn btn-rose btn-round">Login</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+

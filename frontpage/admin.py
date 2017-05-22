@@ -1,0 +1,148 @@
+from django.contrib import admin
+
+from . models import (
+    Button,
+    Widget,
+    FirstSection,
+    Image,
+    Subsection,
+    SecondSection,
+    FourthSection,
+    ThirdSection,
+    FifthSection,
+    ImageSubsection,
+    SixthSection,
+    SeventhSection,
+    EighthSection,
+    UserProfile,
+    Video,
+    NinthSection,
+    TenthSection,
+    EleventhSection,
+    TwelfthSection,
+    ThirteenthSection,
+    Footer,
+    Icon
+)
+
+
+class FirstSectionAdmin(admin.ModelAdmin):
+    list_display = ['section', 'image']
+
+
+class SubsectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'subtitle', 'icon_class',
+                    'content', 'button_text', 'button_text_url', 'content']
+
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['image', 'name', 'my_namespace', 'timestamp']
+
+
+class SecondSectionAdmin(admin.ModelAdmin):
+    list_display = ['section', 'subsection_1', 'subsection_2',
+                    'subsection_3', 'subsection_4']
+
+
+class ThirdSectionAdmin(admin.ModelAdmin):
+    list_display = ['section', 'image']
+
+
+class FourthSectionAdmin(admin.ModelAdmin):
+    list_display = ['section', 'subsection_1', 'subsection_2',
+                    'subsection_3', 'subsection_4']
+
+
+class FifthSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'subsection_1', 'subsection_2',
+                    'subsection_3', 'subsection_4']
+
+
+
+class ImageSubsectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'image', 'subtitle', 'icon_class',
+                    'content', 'button_text', 'button_text_url', 'content']
+
+
+class SixthSectionAdmin(admin.ModelAdmin):
+    list_display = ['subsection', 'video']
+
+
+class SeventhSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'content', 'subsection_1',
+                    'subsection_2', 'subsection_3']
+
+
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ['name', 'timestamp', 'updated', 'file']
+
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'profile_pic', 'is_faculty', 'is_student',
+                    'job_title', 'points']
+
+
+class EighthSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'subtitle', 'button_1', 'button_2']
+
+
+class NinthSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'content', 'faculty_1', 'faculty_2',
+                    'faculty_3', 'faculty_4']
+
+
+class ButtonAdmin(admin.ModelAdmin):
+    list_display = ['button_text', 'button_text_url']
+
+
+class WidgetAdmin(admin.ModelAdmin):
+    list_display = ['text', 'icon', 'count']
+
+
+class TenthSectionAdmin(admin.ModelAdmin):
+    list_display = ['image', 'widget_1', 'widget_2',
+                    'widget_3', 'widget_4']
+
+class EleventhSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'blog_1', 'blog_2', 'blog_3']
+
+
+class ThirteenthSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'widget_1', 'widget_2',
+                    'widget_3']
+
+
+class IconAdmin(admin.ModelAdmin):
+    list_display = ['icon', 'url']
+
+
+class FooterAdmin(admin.ModelAdmin):
+    list_display = ['text', 'image']
+
+
+class TwelfthSectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'subtitle', 'image']
+
+
+admin.site.register(Icon, IconAdmin)
+admin.site.register(Footer, FooterAdmin)
+admin.site.register(TwelfthSection, TwelfthSectionAdmin)
+admin.site.register(EleventhSection, EleventhSectionAdmin)
+admin.site.register(ThirteenthSection, ThirteenthSectionAdmin)
+admin.site.register(TenthSection, TenthSectionAdmin)
+admin.site.register(Widget, WidgetAdmin)
+admin.site.register(Button, ButtonAdmin)
+admin.site.register(NinthSection, NinthSectionAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(EighthSection, EighthSectionAdmin)
+admin.site.register(SeventhSection, SeventhSectionAdmin)
+admin.site.register(Video, VideoAdmin)
+admin.site.register(SixthSection, SixthSectionAdmin)
+admin.site.register(ImageSubsection, ImageSubsectionAdmin)
+admin.site.register(FifthSection, FifthSectionAdmin)
+admin.site.register(ThirdSection, ThirdSectionAdmin)
+admin.site.register(SecondSection, SecondSectionAdmin)
+admin.site.register(FirstSection, FirstSectionAdmin)
+admin.site.register(Image, ImageAdmin)
+admin.site.register(Subsection, SubsectionAdmin)
+admin.site.register(FourthSection, FourthSectionAdmin)

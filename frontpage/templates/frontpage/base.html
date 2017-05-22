@@ -1,0 +1,168 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <!-- title -->
+        <title>JXFLS - International High School</title>
+        <meta name="description" content="LeadGen is a conversion ratio and speed optimized multi-purpose marketing landing page template with drag & drop page builder and tons of readymade elements and demos with greater level of customization possibilities." />
+        <meta name="keywords" content="Marketing, landing page, creative, html5, css3, page builder, drag & drop, multi-purpose, one page, aweber, mailchimp, active campaign, campaign monitor, get response, mailer lite, custom form, product, hotel and resort, resume, personal, restaurant, corporate business, interior design, software, spa salon, travel agency, app landing page, design agency, start-up, e-learning, sports and gym, seo, wedding invitation, hosting, online shopping, yoga and fitness, music show, finance and account, e-book, event, medical, real estate, portfolio, digital marketing, inner content page, sign-up, 404 not found, coming soon" />
+        <meta name="author" content="lgauthor">
+        <!-- favicon -->
+        <link rel="shortcut icon" href="{% static 'frontpage/images/icon/favicon.png' %}">
+        <!-- animation -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/animate.css' %}" />
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/bootstrap.min.css' %}" />
+        <!-- font-awesome icon -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/font-awesome.min.css' %}" />
+        <!-- themify-icons -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/themify-icons.css' %}" />
+        <!-- owl carousel -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/owl.transitions.css' %}" />
+        <link rel="stylesheet" href="{% static 'frontpage/css/owl.carousel.css' %}" /> 
+        <!-- magnific popup -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/magnific-popup.css' %}" /> 
+        <!-- base -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/base.css' %}" /> 
+        <!-- elements -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/elements.css' %}" />
+        <!-- responsive -->
+        <link rel="stylesheet" href="{% static 'frontpage/css/responsive.css' %}" />
+        <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+        <![endif]-->
+        <!--[if IE]>
+            <script src="js/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header class="header-style1" id="header-section3">
+            <!-- nav -->
+            <nav class="navbar bg-white no-margin alt-font tz-header-bg shrink-header header-border-dark light-header">
+                <div class="container navigation-menu">
+                    <div class="row">
+                        <!-- logo -->
+                        <div class="col-md-3 col-sm-4 col-xs-9">
+                            <a href="#home" class="inner-link"><img alt="" src="{% static 'frontpage/images/jxfls_logo.png' %}" data-img-size="(W)163px X (H)39px"></a>
+                        </div>
+                        <!-- end logo -->
+                        <div class="col-md-9 col-sm-8 col-xs-3 position-inherit">
+                            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse pull-right">
+                                <ul class="nav navbar-nav font-weight-500">
+                                    <li class="propClone"><a class="inner-link" href="#content-section22">ABOUT US</a></li>
+                                    <li class="propClone"><a class="inner-link" href="#title-section1">SERVICES</a></li>
+                                    <li class="propClone"><a class="inner-link" href="#team-section3">COURSES</a></li>
+                                    <li class="propClone"><a class="inner-link" href="#team-section2">FACULTY</a></li>
+                                    <li class="propClone"><a class="inner-link" href="#blog-section1">BLOG</a></li>
+                                    <li class="propClone sm-no-border"><a class="inner-link" href="#contact-section3">CONTACT</a></li>
+                                    <li class="propClone sm-no-border"><a class="inner-link" href="/dashboard/">DASHBOARD</a></li>
+                                    <li class="nav-button propClone sm-no-margin-tb float-left btn-medium sm-no-margin-left"> <a href="#subscribe-section1" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">JOIN US</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav> 
+            <!-- end nav -->
+        </header>
+
+
+        <!-- Start Sections Group -->
+        {% block main_section %}
+
+
+        {% endblock main_section %}
+        <!-- End Sections Group -->
+        
+
+        <!-- Footer -->
+        <footer id="footer-section4" class="bg-white builder-bg padding-60px-tb xs-padding-40px-tb footer-style4">
+            <div class="container">
+                <div class="row equalize sm-equalize-auto">
+                    <!-- logo -->
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 sm-text-center sm-margin-five-bottom xs-margin-nine-bottom display-table">
+                        <div class="display-table-cell-vertical-middle">
+                            <a href="#home" class="inner-link"><img src="{{footer.image.image.url}}" alt="" data-img-size="(W)163px X (H)39px"></a>
+                        </div>
+                    </div>
+                    <!-- end logo -->
+                    <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 sm-margin-three-bottom text-center xs-text-center display-table">
+                        <div class="display-table-cell-vertical-middle">
+                            <span class="tz-text">&copy; {{footer.text}}</span>
+                        </div>
+                    </div>
+                    <!-- social elements -->
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 text-right sm-text-center display-table">
+                        <div class="social icon-extra-small display-table-cell-vertical-middle">
+
+                            {% for icon in footer.icons.all %}
+                            <a href="{{icon.url}}" class="margin-sixteen-right">
+                                <i class="fa {{icon.icon}} tz-icon-color"></i>
+                            </a>
+                            {% endfor %}
+
+
+
+                            <a href="#" class="margin-sixteen-right">
+                                <i class="fa fa-twitter tz-icon-color"></i>
+                            </a>
+                            <a href="#" class="margin-sixteen-right">
+                                <i class="fa fa-google-plus tz-icon-color"></i>
+                            </a>
+                            <a href="#" class="margin-sixteen-right">
+                                <i class="fa fa-pinterest tz-icon-color"></i>
+                            </a>
+                            <a href="#" class="margin-sixteen-right">
+                                <i class="fa fa-linkedin tz-icon-color"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa fa-youtube tz-icon-color"></i>
+                            </a>
+                        </div>
+                    </div>                            
+                    <!-- end social elements -->
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        
+        <!-- javascript libraries -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.appear.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontpage/js/smooth-scroll.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontpage/js/bootstrap.min.js' %}"></script>
+        <!-- wow animation -->
+        <script type="text/javascript" src="{% static 'frontpage/js/wow.min.js' %}"></script>
+        <!-- owl carousel -->
+        <script type="text/javascript" src="{% static 'frontpage/js/owl.carousel.min.js' %}"></script>        
+        <!-- images loaded -->
+        <script type="text/javascript" src="{% static 'frontpage/js/imagesloaded.pkgd.min.js' %}"></script>
+        <!-- isotope -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.isotope.min.js' %}"></script> 
+        <!-- magnific popup -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- navigation -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.nav.js' %}"></script>
+        <!-- equalize -->
+        <script type="text/javascript" src="{% static 'frontpage/js/equalize.min.js' %}"></script>
+        <!-- fit videos -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.fitvids.js' %}"></script>
+        <!-- number counter -->
+        <script type="text/javascript" src="{% static 'frontpage/js/jquery.countTo.js' %}"></script>
+        <!-- time counter  -->
+        <script type="text/javascript" src="{% static 'frontpage/js/counter.js' %}"></script>
+        <!-- twitter Fetcher  -->
+        <script type="text/javascript" src="{% static 'frontpage/js/twitterFetcher_min.js' %}"></script>
+        <!-- main -->
+        <script type="text/javascript" src="{% static 'frontpage/js/main.js' %}"></script>
+    </body>
+</html>
