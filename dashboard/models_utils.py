@@ -34,6 +34,35 @@ class IntegerRangeField(IntegerField):
         return super(IntegerRangeField, self).formfield(**defaults)
 
 
+class TimeStampBaseModel(Model):
+
+    timestamp = DateTimeField(
+        editable=False, auto_now_add=True, auto_now=False)
+    updated = DateTimeField(auto_now=True, blank=True, null=True)
+
+    def time_ago(self):
+        return naturaltime(self.timestamp)
+
+    def __str__(self, name=None):
+        """
+        If model has name set that as name.
+
+        If model has name or name set by subclass
+            Then return that name
+        Else return "Class_Name object #*number* cretaed on *date*"
+        """
+
+        if name:
+            return name
+        else:
+            return "{} object #{} created on {}".format(
+                self.__class__.__name__, self.id, self.timestamp
+            )
+
+    class Meta:
+        abstract = True
+
+
 class NameTimeStampBaseModel(Model):
 
     name = CharField(max_length=80, null=True, blank=True)

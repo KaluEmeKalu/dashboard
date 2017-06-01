@@ -43,6 +43,7 @@ from . models_utils import (
     image_upload_location,
     NameTimeStampBaseModel,
     Image,
+    TimeStampBaseModel,
 )
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill, Transpose
@@ -405,6 +406,33 @@ class SchoolClass(Model):
         editable=False, auto_now_add=True, auto_now=False)
     private = BooleanField(default=False, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
+    def get_school_class_user_table(self, user):
+        """
+        Takes User as input
+        Gets School Class User Table if it exists, if not, creates then returns
+        """
+        try:
+            ###don't forget!!!!# change models to make sure only one user/school_class can be made
+            school_class_user_table = SchoolClassUserTable.objects.get(
+                user=user,
+                school_class=self
+            )
+        except:
+            school_class_user_table = SchoolClassUserTable.objects.create(
+                user=user,
+                school_class=self
+            )
+        return school_class_user_table
+
+    
+    def get_step_substeps(self):
+        count = 0
+        for step in self.steps.all():
+            count += step.get_total_substeps()
+        return count
+
 
     def get_absolute_url(self):
         isDS = settings.IS_DEPLOYMENT_SERVER
@@ -838,78 +866,6 @@ class ZipStored(Model):
 
 
 
-class Video(Model):
-    file = FileField(null=True, blank=True, upload_to=step_file_upload_location)
-    name = CharField(max_length=180, blank=True, null=True)
-    timestamp = DateTimeField(
-        editable=False, auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-    order = models.IntegerField(default=0)
-    watched = BooleanField(default=False)
-    has_achievement = BooleanField(default=False)
-
-
-    def get_timestamp(self, pretty=False):
-
-        if pretty:
-            return self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-
-        return self.timestamp.strftime("%Y-%m-%d_%H:%M:%S")
-
-
-    def is_watched(self, user_id):
-        user = User.objects.get(pk=user_id)
-        try:
-            VideoAchievement.object.get(user=user, video=self)
-            return True
-        except:
-            return False
-
-
-    def get_or_create_achievement(self):
-        """
-        Get Achievement if it exists
-        If not create one.
-        """
-
-        try:
-            points = 20
-            name = self.name
-            message = "You have unlocked the {} achievement!".format(name)
-            school_class = self.steps.first().school_class # potential error. first step could belong to another course.
-            step = self.steps.first() # potential error. first step could belong to another course.
-
-            achievement, created = Achievement.objects.get_or_create(
-                name=name, message=message, school_class=school_class,
-                points=points, step=step)
-
-            achievement.save()
-
-            return achievement
-        except Exception as e:
-            print("Create Achievement Did not Work! Got following Error --> ")
-            print(e)
-
-
-    def make_achievement(self):
-        if self.has_achievement:
-            self.get_or_create_achievement()
-
-    def time_ago(self):
-        return naturaltime(self.timestamp)
-
-    def __str__(self):
-
-        try:
-            name = '{} Submitted Image on {}'.format(self.name, self.timestamp)
-        except:
-            name = 'Submitted Image on {}'.format(self.get_timestamp(pretty=True))
-        return name
-
-
-    class Meta:
-        ordering = ['order', ]
-        
 
 class StepHelper(NameTimeStampBaseModel):
 
@@ -939,7 +895,6 @@ class StepHelper(NameTimeStampBaseModel):
         ratio_watched = {'watched': watched_videos, 'total': len(videos)}
 
         return ratio_watched
-
 
 
 
@@ -1069,6 +1024,7 @@ class Achievement(NameTimeStampBaseModel):
     step = ForeignKey('Step', null=True, blank=True,
                       related_name="achievements")
 
+
 def get_achievement_points(user_obj):
     achievements = user_obj.user_achievements.all()
 
@@ -1078,8 +1034,67 @@ def get_achievement_points(user_obj):
     return points
 
 
-class StepAchievementTable(Model):
-    pass
+class CompletedVideo(TimeStampBaseModel):
+    user = ForeignKey(User, null=True, blank=True,
+                      related_name='completed_videos')
+    video = ForeignKey('Video', null=True, blank=True,
+                       related_name='completed_videos')
+    step = ForeignKey('Step', null=True, blank=True,
+                      related_name='completed_videos')
+
+
+class CompletedExam(TimeStampBaseModel):
+    user = ForeignKey(User, null=True, blank=True,
+                      related_name='completed_exams')
+    exam = ForeignKey('Exam', null=True, blank=True,
+                      related_name='completed_exams')
+    step = ForeignKey('Step', null=True, blank=True,
+                      related_name='completed_exams')
+
+
+class CompletedArticle(TimeStampBaseModel):
+    user = ForeignKey(User, null=True, blank=True,
+                      related_name='completed_articles')
+    article = ForeignKey('Article', null=True, blank=True,
+                         related_name='completed_articles')
+    step = ForeignKey('Step', null=True, blank=True,
+                      related_name='completed_articles')
+
+
+class SchoolClassUserTable(Model):
+    school_class = ForeignKey('SchoolClass', null=True, blank=True,
+                              related_name='school_class_user_tables')
+    user = ForeignKey(User, null=True, blank=True,
+                      related_name='school_class_user_tables')
+
+    def get_completed_videos(self):
+        return CompletedVideo.objects.filter(step__school_class=self.school_class,
+                                             user=self.user)
+
+    def get_completed_articles(self):
+        return CompletedArticle.objects.filter(step__school_class=self.school_class,
+                                               user=self.user)
+
+    def get_completed_exams(self):
+        return CompletedExam.objects.filter(step__school_class=self.school_class,
+                                            user=self.user)
+
+    
+
+
+
+    def get_percentage_complete(self):
+        videos_done = len(self.get_completed_videos())
+        exams_done = len(self.get_completed_articles())
+        articles_done = len(self.get_completed_exams())
+
+        total_done = videos_done + exams_done + articles_done
+
+        total_substeps = self.school_class.get_step_substeps()
+
+        percent_done = float(total_done) / float(total_substeps)
+
+        return round(percent_done * 100)
 
 
 class VideoAchievement(Model):
@@ -1087,13 +1102,13 @@ class VideoAchievement(Model):
     achievement = ForeignKey("Achievement", related_name="video_achievements")
     user = ForeignKey(User, related_name="video_achievements")
 
-
     def check_not_duplicate(self):
         """
         Checks to make suer
         that no two video achiveemnts are the same.
         """
         pass
+
 
 class UserAchievement(Model):
     user = ForeignKey(User, null=True, blank=True,
@@ -1264,6 +1279,95 @@ class TeacherProfile(models.Model):
 
     def get_image_url(self):
         return self.user.user_profile.profile_pic.image.url
+
+
+
+class Video(Model):
+    file = FileField(null=True, blank=True, upload_to=step_file_upload_location)
+    name = CharField(max_length=180, blank=True, null=True)
+    timestamp = DateTimeField(
+        editable=False, auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now=True, blank=True, null=True)
+    order = models.IntegerField(default=0)
+    watched = BooleanField(default=False)
+    has_achievement = BooleanField(default=False)
+
+    def toggle_user_completed_video(self, user, step):
+        try:
+            completed_video = CompletedVideo.objects.get(
+                user=user, video=self, step=step)
+            completed_video.delete()
+            message = "Video Deleted!"
+        except:
+            completed_video = CompletedVideo.objects.create(
+                user=user, video=self, step=step)
+            message = "Video Marked Completed!"
+
+        return message
+
+
+    def get_timestamp(self, pretty=False):
+
+        if pretty:
+            return self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
+        return self.timestamp.strftime("%Y-%m-%d_%H:%M:%S")
+
+
+    def is_watched(self, user_id):
+        user = User.objects.get(pk=user_id)
+        try:
+            VideoAchievement.object.get(user=user, video=self)
+            return True
+        except:
+            return False
+
+
+    def get_or_create_achievement(self):
+        """
+        Get Achievement if it exists
+        If not create one.
+        """
+
+        try:
+            points = 20
+            name = self.name
+            message = "You have unlocked the {} achievement!".format(name)
+            school_class = self.steps.first().school_class # potential error. first step could belong to another course.
+            step = self.steps.first() # potential error. first step could belong to another course.
+
+            achievement, created = Achievement.objects.get_or_create(
+                name=name, message=message, school_class=school_class,
+                points=points, step=step)
+
+            achievement.save()
+
+            return achievement
+        except Exception as e:
+            print("Create Achievement Did not Work! Got following Error --> ")
+            print(e)
+
+
+    def make_achievement(self):
+        if self.has_achievement:
+            self.get_or_create_achievement()
+
+    def time_ago(self):
+        return naturaltime(self.timestamp)
+
+    def __str__(self):
+
+        try:
+            name = '{} Submitted Image on {}'.format(self.name, self.timestamp)
+        except:
+            name = 'Submitted Image on {}'.format(self.get_timestamp(pretty=True))
+        return name
+
+
+    class Meta:
+        ordering = ['order', ]
+        
+
 
 
 class StudentProfile(models.Model):

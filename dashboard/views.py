@@ -43,7 +43,10 @@ from .models import (
     VideoAchievement,
     make_all_user_profiles,
     Post,
-    Video
+    Video,
+    Step,
+    SchoolClassUserTable,
+    CompletedVideo,
 )
 
 # commented out because was getting weird
@@ -341,26 +344,20 @@ def turn_in_exam(request, exam_paper_id):
 #     response_data = {'watched': video.watched, 'percentage': percentage}
 
 
-def toggle_video_watched(request, video_id):
+def toggle_video_watched(request, video_id, step_id):
 
     video = Video.objects.get(pk=video_id)
-    achievement = video.get_or_create_achievement()
+    step = Step.objects.get(pk=step_id)
+
 
     # delete video achievement if user has one,
     # if user doesn't have a video achievement create one
-    try:
-        video_achievement = VideoAchievement.objects.get(
-            achievement=achievement, user=request.user, video_id=video_id)
-        video_achievement.delete()
-        isWatched = False
-    except:
-        video_achievement = VideoAchievement.objects.create(
-            achievement=achievement, user=request.user, video_id=video_id)
-        isWatched = True
+    message = video.toggle_user_completed_video(user=request.user, step=step)
+    school_class_user_table = step.school_class.get_school_class_user_table(user=request.user)
 
-    percentage = video.steps.first().school_class.get_percentage_completed(request.user)
+    percentage = school_class_user_table.get_percentage_complete()
 
-    response_data = {'watched': isWatched, 'percentage': percentage}
+    response_data = {'message': message, 'percentage': percentage}
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
@@ -463,9 +460,6 @@ def exam(request, exam_id, turn_in=False):
     return render(request, 'dashboard/exam.html', context)
 
 
-
-
-
 def word_search(request, anki_import=True):
 
     words = Word.objects.all()
@@ -532,20 +526,18 @@ def word_search(request, anki_import=True):
                     )
                     anki_import_obj.save()
 
-
                 filename = request.FILES['file'].name
 
                 # create response
                 response = HttpResponse(content_type='application/txt')
-                
+
                 # make it an attachment so that it is download by browser
                 # and give it a filename of  *filename*_anki_import.txt
                 response[
                     'Content-Disposition'] = 'attachment; filename="{}_anki_import.txt"'.format(filename)
-                
+
                 # write content in response and return it
                 response.write(content)
-
 
                 # return response ***TEST CODE***
                 response = anki_import_obj.getfiles()
@@ -634,6 +626,7 @@ def index(request):
     make_all_user_profiles()
     return render(request, 'dashboard/index.html')
 
+
 def dashboard(request, school_class_id=None):
 
     # this if/else statement handles
@@ -643,7 +636,10 @@ def dashboard(request, school_class_id=None):
     else:
         school_class = SchoolClass.objects.first()
 
-    school_class.give_students_class_achievement()
+    try:
+        school_class.give_students_class_achievement()
+    except:
+        pass
     students = school_class.students.all()
     post_form = PostForm()
     posts = school_class.posts.all()
@@ -658,35 +654,41 @@ def dashboard(request, school_class_id=None):
 
     context = {'students': students, 'school_class': school_class,
                'post_form': post_form, 'posts': posts}
+
+    # pass school_class_user_table to context if user athenticated
+    if request.user.is_authenticated():
+        school_class_user_table = school_class.get_school_class_user_table(
+            request.user)
+        context['school_class_user_table'] = school_class_user_table
 
     return render(request, 'dashboard/dashboard.html', context)
 
-def school_class_dashboard(request, school_class_id=None):
+# def school_class_dashboard(request, school_class_id=None):
 
-    # this if/else statement handles
-    # mapping to urls with a class id and those without.
-    if school_class_id:
-        school_class = get_object_or_404(SchoolClass, pk=int(school_class_id))
-    else:
-        school_class = SchoolClass.objects.first()
+#     # this if/else statement handles
+#     # mapping to urls with a class id and those without.
+#     if school_class_id:
+#         school_class = get_object_or_404(SchoolClass, pk=int(school_class_id))
+#     else:
+#         school_class = SchoolClass.objects.first()
 
-    school_class.give_students_class_achievement()
-    students = school_class.students.all()
-    post_form = PostForm()
-    posts = school_class.posts.all()
+#     school_class.give_students_class_achievement()
+#     students = school_class.students.all()
+#     post_form = PostForm()
+#     posts = school_class.posts.all()
 
-    # turn django collection to
-    # regular python list
-    students = [s for s in students]
+#     # turn django collection to
+#     # regular python list
+#     students = [s for s in students]
 
-    # turn it into 2d lists with the
-    # first lists having 4 items each
-    students = make_2d_arrays(students)
+#     # turn it into 2d lists with the
+#     # first lists having 4 items each
+#     students = make_2d_arrays(students)
 
-    context = {'students': students, 'school_class': school_class,
-               'post_form': post_form, 'posts': posts}
+#     context = {'students': students, 'school_class': school_class,
+#                'post_form': post_form, 'posts': posts}
 
-    return render(request, 'dashboard/school_class_dashboard.html', context)
+#     return render(request, 'dashboard/school_class_dashboard.html', context)
 
 
 def tables(request):
@@ -742,7 +744,8 @@ class UserLoginView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        username = request.POST['username'].lower() # potential bug if username created somehow with uppercase letters
+        # potential bug if username created somehow with uppercase letters
+        username = request.POST['username'].lower()
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
@@ -797,7 +800,6 @@ class RegisterView(View):
                     return redirect('dashboard:index')
 
         return render(request, self.template_name, {'form': form})
-
 
 
 @login_required(login_url='/dashboard/login/')

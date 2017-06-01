@@ -24,6 +24,11 @@ from .models import (
     Video,
     Text,
     Step,
+    CompletedArticle,
+    CompletedExam,
+    CompletedVideo,
+    SchoolClassUserTable,
+    CompletedVideo,
     Word)
 
 
@@ -150,6 +155,27 @@ class AnkiImportTextFieldAdmin(admin.ModelAdmin):
 class VideoAdmin(admin.ModelAdmin):
     list_display = ['file', 'name', 'timestamp', 'updated']
 
+
+class CompletedExamAdmin(admin.ModelAdmin):
+    list_display = ['user', 'exam', 'step']
+
+
+class CompletedArticleAdmin(admin.ModelAdmin):
+    list_display = ['user', 'article', 'step']
+
+
+class CompletedVideoAdmin(admin.ModelAdmin):
+    list_display = ['user', 'video', 'step']
+
+
+class SchoolClassUserTableAdmin(admin.ModelAdmin):
+    list_display = ['user', 'school_class']
+
+
+admin.site.register(SchoolClassUserTable, SchoolClassUserTableAdmin)
+admin.site.register(CompletedArticle, CompletedArticleAdmin)
+admin.site.register(CompletedExam, CompletedExamAdmin)
+admin.site.register(CompletedVideo, CompletedVideoAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(AnkiImportTextFile, AnkiImportTextFieldAdmin)
 admin.site.register(Article, AritcleAdmin)

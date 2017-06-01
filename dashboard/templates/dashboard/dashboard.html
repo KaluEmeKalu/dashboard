@@ -1,6 +1,6 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
-
+{% load app_filters %}
 
 {% block content %}
 
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3 class="title text-center">{{school_class.name}}</h3>
-                <span class="percentage_class">{{school_class.get_percentage_completed}}</span>%
+                <span class="percentage_class">{{school_class_user_table.get_percentage_complete}}</span>%
                             <!-- Progress Bar -->
                             <div class="progress progress-striped ">
                               <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width: {{school_class.get_percentage_completed}}%">
@@ -58,7 +58,7 @@
 
                             {% for video in step.videos.all %}
 
-                            <label onclick="mark_video_watched({{video.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
+                            <label checked onchange="mark_video_watched({{video.id}}, {{step.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
                                 <input name="optionsCheckboxes" type="checkbox">
                                 <span class="checkbox-material"><span class="check"></span></span>
                             </label>                            
