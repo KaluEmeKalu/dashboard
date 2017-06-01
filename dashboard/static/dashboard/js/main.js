@@ -1,5 +1,5 @@
 var production_url = 'http://127.0.0.1:8000/dashboard/';
-var deployment_url = 'http://112.74.48.237/dashboard/';
+var deployment_url = 'http://119.23.231.23/dashboard/';
 var post_url = production_url;
 
 save_answer_url = post_url + 'save_answer/';
