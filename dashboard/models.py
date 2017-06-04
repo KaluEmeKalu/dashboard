@@ -1092,7 +1092,13 @@ class SchoolClassUserTable(Model):
 
         total_substeps = self.school_class.get_step_substeps()
 
-        percent_done = float(total_done) / float(total_substeps)
+        try:
+            percent_done = float(total_done) / float(total_substeps)
+        except ZeroDivisionError as e:
+            print("""Cannot divide by Zero. 
+                  school_class.get_step_substeps() returned 
+                  zero total class substeps. """, e)
+            return 0
 
         return round(percent_done * 100)
 
