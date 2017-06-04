@@ -326,7 +326,7 @@ def turn_in_exam(request, exam_paper_id):
     # form.save()
     #print("Audio added " * 88)
 
-    # return redirect('portals:index')
+    # return redirect('dashboard:dashboard')
 
 
 # def mark_video_watched(request, video_id):
@@ -627,6 +627,7 @@ def index(request):
     return render(request, 'dashboard/index.html')
 
 
+@login_required(login_url="/dashboard/login/")
 def dashboard(request, school_class_id=None):
 
     # this if/else statement handles
@@ -745,6 +746,9 @@ class UserLoginView(View):
     template_name = 'dashboard/login.html'
 
     def get(self, request):
+
+        if request.user.is_authenticated():
+            return redirect('dashboard:dashboard')
         form = self.form_class(None)
         return render(request, self.template_name, {'form': form})
 
@@ -759,7 +763,7 @@ class UserLoginView(View):
 
             if user.is_active:
                 login(request, user)
-                return redirect('dashboard:index')
+                return redirect('dashboard:dashboard')
             else:
                 # An inactive account was used - no logging in!
                 messages.error(request, 'Your account is disable')
@@ -779,6 +783,9 @@ class RegisterView(View):
     template_name = 'dashboard/register.html'
 
     def get(self, request):
+
+        if request.user.is_authenticated:
+            return redirect('dashboard:dashboard')
         form = self.form_class(None)
         return render(request, self.template_name, {'form': form})
 
@@ -802,7 +809,7 @@ class RegisterView(View):
                 if user.is_active:
                     login(request, user)
                     # change this. This is error
-                    return redirect('dashboard:index')
+                    return redirect('dashboard:dashboard')
 
         return render(request, self.template_name, {'form': form})
 
@@ -810,7 +817,7 @@ class RegisterView(View):
 @login_required(login_url='/dashboard/login/')
 def user_logout(request):
     logout(request)
-    return redirect('dashboard:index')
+    return redirect('dashboard:dashboard')
 
 
 @login_required
@@ -836,6 +843,6 @@ def change_user_image(request):
             user_profile.profile_pic = user_image
             user_profile.save()
 
-            return redirect('dashboard:index')
+            return redirect('dashboard:dashboard')
 
     return render(request, 'dashboard/change_user_pic.html', {'form': UserImageForm()})
