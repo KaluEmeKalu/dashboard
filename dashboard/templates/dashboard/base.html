@@ -31,7 +31,7 @@
         Tip 3: you can change the color of the sidebar with data-background-color="white | black"
     -->
             <div class="logo">
-                <img src="{% static 'dashboard/img/jxfls_logo.png' %}">
+                <a href="{% url 'frontpage:index' %}"><img src="{% static 'dashboard/img/jxfls_logo.png' %}"></a>
             </div>
             <div class="logo logo-mini">
                 <a href="http://www.creative-tim.com" class="simple-text">
@@ -91,7 +91,7 @@
                                             <b class="caret"></b>
                                         </p>
                                     </a>
-                                    <div class="collapse" id="test">
+                                    <div style="padding-left: 20px" class="collapse" id="test">
                                         <ul class="nav">
 
                                             {% for school_class in course.school_classes.all %}

@@ -659,7 +659,12 @@ def dashboard(request, school_class_id=None):
     if request.user.is_authenticated():
         school_class_user_table = school_class.get_school_class_user_table(
             request.user)
+
+        completed_videos = school_class_user_table.get_completed_videos()
+        completed_videos_ids = [completed_video.video.id for completed_video
+                                in completed_videos]
         context['school_class_user_table'] = school_class_user_table
+        context['completed_videos_ids'] = completed_videos_ids
 
     return render(request, 'dashboard/dashboard.html', context)
 

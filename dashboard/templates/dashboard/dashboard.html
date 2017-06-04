@@ -13,8 +13,8 @@
                 <span class="percentage_class">{{school_class_user_table.get_percentage_complete}}</span>%
                             <!-- Progress Bar -->
                             <div class="progress progress-striped ">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width: {{school_class.get_percentage_completed}}%">
-                                <span class="sr-only">{{school_class.get_percentage_completed}}% Complete</span>
+                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width:{{school_class_user_table.get_percentage_complete}}%">
+                                <span class="sr-only">{{school_class_user_table.get_percentage_complete}}% Complete</span>
                               </div>
                             </div>
 
@@ -63,7 +63,7 @@
                                                     {% for video in step.videos.all %}
 
                                                     <label checked onchange="mark_video_watched({{video.id}}, {{step.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
-                                                        <input name="optionsCheckboxes" type="checkbox">
+                                                        <input name="optionsCheckboxes" {% if video.id in completed_videos_ids %} checked {% endif %} type="checkbox">
                                                         <span class="checkbox-material"><span class="check"></span></span>
                                                     </label>                            
 

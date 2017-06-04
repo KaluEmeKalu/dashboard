@@ -437,8 +437,8 @@ class SchoolClass(Model):
     def get_absolute_url(self):
         isDS = settings.IS_DEPLOYMENT_SERVER
         try:
-            dsURL = 'http://112.74.48.237/class/'
-            psURL = 'http://127.0.0.1:8000/class/'
+            dsURL = 'http://112.74.48.237/dashboard/class/'
+            psURL = 'http://127.0.0.1:8000/dashboard/class/'
             url = dsURL if isDS else psURL
             return url + str(self.id)
         except Exception as e:
