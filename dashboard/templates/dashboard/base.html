@@ -86,12 +86,12 @@
                             <ul class="nav">
                                 {% for course in courses %}
                                 <li>
-                                    <a data-toggle="collapse" href="#test">
+                                    <a data-toggle="collapse" href="#course{{course.id}}">
                                         <p>{{course.name}}
                                             <b class="caret"></b>
                                         </p>
                                     </a>
-                                    <div style="padding-left: 20px" class="collapse" id="test">
+                                    <div style="padding-left: 20px" class="collapse" id="course{{course.id}}">
                                         <ul class="nav">
 
                                             {% for school_class in course.school_classes.all %}
