@@ -96,7 +96,7 @@
 
                                             {% for school_class in course.school_classes.all %}
                                             <li>
-                                                <a href="{{school_class.get_absolute_url}}">{{school_class.name}}</a>
+                                                <a href="{% url 'dashboard:school_class_dashboard' school_class_id=school_class.id %}">{{school_class.name}}</a>
                                             </li>
                                             {% endfor %}
 
