@@ -17,11 +17,6 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="../dashboard.html">
-                            <i class="material-icons">dashboard</i> Dashboard
-                        </a>
-                    </li>
                     <li class="{% block register_nav_class %}{% endblock %}">
                         <a href="{% url 'dashboard:register' %}">
                             <i class="material-icons">person_add</i> Register
@@ -39,7 +34,8 @@
 
 
     <div class="wrapper wrapper-full-page">
-        <div class="full-page login-page" filter-color="black" {% block data_image %} data-image="{% static 'dashboard/img/lock.jpeg' %}" {% endblock %} >
+        <!-- Image must be 2880 x 1924 -->
+        <div class="full-page login-page" filter-color="black" {% block image %} data-image="{% static 'dashboard/img/lock.jpeg' %}" {% endblock %} >
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
             <div class="content">
                 <div class="container">
@@ -95,11 +91,6 @@
                             <li>
                                 <a href="{% url 'frontpage:index' %}">
                                     JXFLS IHS
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
                                 </a>
                             </li>
                         </ul>
