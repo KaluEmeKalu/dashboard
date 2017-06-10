@@ -17,14 +17,15 @@ from . models import (
 )
 
 
-def index(request):
+def index(request, isChinese=None):
     first_sections = FirstSection.objects.all()
     first_section = first_sections.first()
-    context = {}
+    context = {'isChinese': isChinese}
 
 
     try:
-        context = {'first_sections': first_sections, 'first_section': first_section}
+        context['first_sections'] = first_sections
+        context['first_section'] = first_section
 
         # Get Second SubSection
         context['second_subsection'] = SecondSection.objects.first()
@@ -38,7 +39,6 @@ def index(request):
 
         # Get Fifth SubSection
         context['fifth_section'] = FifthSection.objects.first()
-
 
         # Get Sixth SubSection
         context['sixth_section'] = SixthSection.objects.first()

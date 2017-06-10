@@ -26,13 +26,40 @@ from django.db.models import (
 )
 
 
+class Video(NameTimeStampBaseModel):
+    file = FileField(null=True, blank=True, upload_to=video_upload_location)
+
+
+class MailingListEntry(TimeStampBaseModel):
+    email = CharField(max_length=180, null=True, blank=True)
+    name = CharField(max_length=180, null=True, blank=True)
+
+
+class Widget(TimeStampBaseModel):
+    text = CharField(max_length=180, null=True, blank=True)
+    icon = CharField(max_length=100, null=True, blank=True)
+    count = IntegerField(default=0, null=True, blank=True)
+    text_2 = CharField(max_length=180, null=True, blank=True)
+
+    def __str__(self):
+        return self.text
+
+
 class Subsection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
+
+    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
     subtitle = CharField(max_length=180, null=True, blank=True)
+
     button_text = CharField(max_length=180, null=True, blank=True)
-    button_text_url = CharField(max_length=180, null=True, blank=True)
+    chinese_button_text = CharField(max_length=180, null=True, blank=True)
+
+    chinese_content = TextField(null=True, blank=True)
     content = TextField(null=True, blank=True)
+
     icon_class = CharField(max_length=180, null=True, blank=True)
+    button_text_url = CharField(max_length=180, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -40,16 +67,59 @@ class Subsection(TimeStampBaseModel):
 
 class ImageSubsection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
+
     subtitle = CharField(max_length=180, null=True, blank=True)
+    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
+
     button_text = CharField(max_length=180, null=True, blank=True)
+    chinese_button_text = CharField(max_length=180, null=True, blank=True)
+
     button_text_url = CharField(max_length=180, null=True, blank=True)
+    chinese_button_text_url = CharField(max_length=180, null=True, blank=True)
+
     content = TextField(null=True, blank=True)
+    chinese_content = TextField(null=True, blank=True)
+
     icon_class = CharField(max_length=180, null=True, blank=True)
     image = ForeignKey(
         'Image', related_name="image_subsections", null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+
+class Icon(TimeStampBaseModel):
+    icon = CharField(max_length=180, null=True, blank=True)
+    url = CharField(max_length=180, null=True, blank=True)
+
+
+class Footer(TimeStampBaseModel):
+    text = TextField(null=True, blank=True)
+    image = ForeignKey(
+        'Image', related_name="footers", null=True, blank=True)
+    icons = ManyToManyField('Icon', blank=True,
+                            related_name='footers')
+
+
+class UserProfile(TimeStampBaseModel):
+    profile_pic = ForeignKey(
+        'Image', null=True, blank=True, related_name='profile_pic')
+    all_profile_pics = ManyToManyField(
+        'Image', blank=True, related_name="all_user_profiles")
+    is_student = BooleanField(default=True)
+    is_faculty = BooleanField(default=False)
+    points = IntegerField(default=0, blank=True, null=True)
+    job_title = CharField(max_length=180, null=True, blank=True)
+    user = OneToOneField(User, related_name="profile")
+
+    def __str__(self):
+        return self.user.username
+
+
+class Button(TimeStampBaseModel):
+    button_text = CharField(max_length=180, null=True, blank=True)
+    button_text_url = CharField(max_length=180, null=True, blank=True)
 
 
 class FirstSection(TimeStampBaseModel):
@@ -62,13 +132,17 @@ class SecondSection(TimeStampBaseModel):
     section = ForeignKey('Subsection',
                          related_name='second_sections',
                          null=True, blank=True)
-    subsection_1 = ForeignKey('Subsection', related_name='second_sections_ones',
+    subsection_1 = ForeignKey('Subsection',
+                              related_name='second_sections_ones',
                               blank=True)
-    subsection_2 = ForeignKey('Subsection', related_name='second_sections_twos',
+    subsection_2 = ForeignKey('Subsection',
+                              related_name='second_sections_twos',
                               blank=True)
-    subsection_3 = ForeignKey('Subsection', related_name='second_sections_threes',
+    subsection_3 = ForeignKey('Subsection',
+                              related_name='second_sections_threes',
                               blank=True)
-    subsection_4 = ForeignKey('Subsection', related_name='second_sections_fours',
+    subsection_4 = ForeignKey('Subsection',
+                              related_name='second_sections_fours',
                               blank=True)
 
 
@@ -82,15 +156,20 @@ class ThirdSection(TimeStampBaseModel):
 class FourthSection(TimeStampBaseModel):
     section = ForeignKey('Subsection', null=True, blank=True,
                          related_name="fourth_sections")
-    subsection_1 = ForeignKey('Subsection', related_name='fourth_sections_ones',
+    subsection_1 = ForeignKey('Subsection',
+                              related_name='fourth_sections_ones',
                               blank=True)
-    subsection_2 = ForeignKey('Subsection', related_name='fourth_sections_twos',
+    subsection_2 = ForeignKey('Subsection',
+                              related_name='fourth_sections_twos',
                               blank=True)
-    subsection_3 = ForeignKey('Subsection', related_name='fourth_sections_threes',
+    subsection_3 = ForeignKey('Subsection',
+                              related_name='fourth_sections_threes',
                               blank=True)
-    subsection_4 = ForeignKey('Subsection', related_name='fourth_sections_fours',
+    subsection_4 = ForeignKey('Subsection',
+                              related_name='fourth_sections_fours',
                               blank=True)
-    image = ForeignKey('Image', related_name="fourth_sections",
+    image = ForeignKey('Image',
+                       related_name="fourth_sections",
                        null=True, blank=True)
 
 
@@ -108,10 +187,6 @@ class FifthSection(TimeStampBaseModel):
     subsection_4 = ForeignKey('ImageSubsection',
                               related_name='fourth_sections_fours',
                               blank=True)
-
-
-class Video(NameTimeStampBaseModel):
-    file = FileField(null=True, blank=True, upload_to=video_upload_location)
 
 
 class SixthSection(TimeStampBaseModel):
@@ -135,7 +210,6 @@ class SeventhSection(TimeStampBaseModel):
                               blank=True)
 
 
-
 class EighthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
     subtitle = CharField(max_length=180, null=True, blank=True)
@@ -143,6 +217,7 @@ class EighthSection(TimeStampBaseModel):
                           related_name='eight_section_ones')
     button_2 = ForeignKey('Button', null=True, blank=True,
                           related_name='eight_section_twos')
+
 
 class NinthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
@@ -156,16 +231,6 @@ class NinthSection(TimeStampBaseModel):
                            related_name='eight_section_threes')
     faculty_4 = ForeignKey('UserProfile', null=True, blank=True,
                            related_name='eight_section_fours')
-
-
-class Widget(TimeStampBaseModel):
-    text = CharField(max_length=180, null=True, blank=True)
-    icon = CharField(max_length=100, null=True, blank=True)
-    count = IntegerField(default=0, null=True, blank=True)
-    text_2 = CharField(max_length=180, null=True, blank=True)
-
-    def __str__(self):
-      return self.text
 
 
 class TenthSection(TimeStampBaseModel):
@@ -199,24 +264,6 @@ class TwelfthSection(TimeStampBaseModel):
         'Image', related_name="twelfth_sections", null=True, blank=True)
 
 
-class MailingListEntry(TimeStampBaseModel):
-    email = CharField(max_length=180, null=True, blank=True)
-    name = CharField(max_length=180, null=True, blank=True)
-
-
-class Icon(TimeStampBaseModel):
-    icon = CharField(max_length=180, null=True, blank=True)
-    url = CharField(max_length=180, null=True, blank=True)
-
-
-class Footer(TimeStampBaseModel):
-    text = TextField(null=True, blank=True)
-    image = ForeignKey(
-        'Image', related_name="footers", null=True, blank=True)
-    icons = ManyToManyField('Icon', blank=True,
-                            related_name='footers')
-
-
 class ThirteenthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
     widget_1 = ForeignKey('Widget', null=True, blank=True,
@@ -225,24 +272,3 @@ class ThirteenthSection(TimeStampBaseModel):
                           related_name='thirteenth_section_twos')
     widget_3 = ForeignKey('Widget', null=True, blank=True,
                           related_name='thirteenth_section_threes')
-
-
-
-class UserProfile(TimeStampBaseModel):
-    profile_pic = ForeignKey(
-        'Image', null=True, blank=True, related_name='profile_pic')
-    all_profile_pics = ManyToManyField(
-        'Image', blank=True, related_name="all_user_profiles")
-    is_student = BooleanField(default=True)
-    is_faculty = BooleanField(default=False)
-    points = IntegerField(default=0, blank=True, null=True)
-    job_title = CharField(max_length=180, null=True, blank=True)
-    user = OneToOneField(User, related_name="profile")
-
-    def __str__(self):
-        return self.user.username
-
-
-class Button(TimeStampBaseModel):
-    button_text = CharField(max_length=180, null=True, blank=True)
-    button_text_url = CharField(max_length=180, null=True, blank=True)

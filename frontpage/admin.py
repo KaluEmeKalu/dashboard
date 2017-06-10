@@ -31,8 +31,9 @@ class FirstSectionAdmin(admin.ModelAdmin):
 
 
 class SubsectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'subtitle', 'icon_class',
-                    'content', 'button_text', 'button_text_url', 'content']
+    list_display = ['title', 'chinese_title', 'subtitle', 'chinese_subtitle',
+                    'icon_class', 'chinese_content', 'content', 'chinese_content',
+                    'button_text', 'chinese_button_text', 'button_text_url']
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -60,8 +61,10 @@ class FifthSectionAdmin(admin.ModelAdmin):
 
 
 class ImageSubsectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'image', 'subtitle', 'icon_class',
-                    'content', 'button_text', 'button_text_url', 'content']
+    list_display = ['title', 'chinese_title', 'image', 'subtitle',
+                    'chinese_subtitle', 'icon_class', 'chinese_content',
+                    'content', 'button_text', 'chinese_button_text',
+                    'button_text_url']
 
 
 class SixthSectionAdmin(admin.ModelAdmin):
