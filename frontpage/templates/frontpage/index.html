@@ -20,14 +20,26 @@
                                         <div class="img-border tz-border" id="tz-br-4"></div>
                                         <div class="slider-content-box">
                                             <div class="title-extra-large-6 sm-title-extra-large-4 xs-title-extra-large-2 line-height-80 font-weight-600 text-white slider-title margin-seven-bottom tz-text" id="tz-slider-text67">
-                                            {% if isChinese == "True"%}
+                                            {% if isChinese == "True" and section.section.chinese_content %}
                                             {{section.section.chinese_title}}
                                             {% else %}
                                             {{section.section.title}}
                                             {% endif %}
                                             </div>
-                                            <div class="text-white text-extra-large text-white main-font font-weight-500 slider-text margin-twelve-bottom tz-text width-90 xs-width-100 xs-title-medium" id="tz-slider-text68"><p>{{section.section.content}}</p></div>
-                                            <a class="btn btn-medium highlight-button-white-border propClone z-index-5 position-relative" id="tz-slider-text69" href="{{first_section.button_text_link}}"><span class="tz-text" id="tz-btn-7">{{section.section.button_text}}</span></a>
+                                            <div class="text-white text-extra-large text-white main-font font-weight-500 slider-text margin-twelve-bottom tz-text width-90 xs-width-100 xs-title-medium" id="tz-slider-text68"><p>
+                                            {% if isChinese == "True" and section.section.chinese_content %}
+                                            {{section.section.chinese_content}}
+                                            {% else %}
+                                            {{section.section.content}}
+                                            {% endif %}
+                                            </p></div>
+                                            <a class="btn btn-medium highlight-button-white-border propClone z-index-5 position-relative" id="tz-slider-text69" href="{{first_section.button_text_link}}"><span class="tz-text" id="tz-btn-7">
+                                            {% if isChinese == "True" and section.section.chinese_button_text %}
+                                            {{section.section.chinese_button_text}}
+                                            {% else %}
+                                            {{section.section.button_text}}
+                                            {% endif %}
+                                            </span></a>
                                         </div>
                                     </div>
                                 </div>
