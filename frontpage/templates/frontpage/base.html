@@ -65,7 +65,13 @@
                                     <li class="propClone"><a class="inner-link" href="#blog-section1">BLOG</a></li>
                                     <li class="propClone sm-no-border"><a class="inner-link" href="#contact-section3">CONTACT</a></li>
                                     <li class="propClone sm-no-border"><a class="inner-link" href="/dashboard/">DASHBOARD</a></li>
-                                    <li class="nav-button propClone sm-no-margin-tb float-left btn-medium sm-no-margin-left"> <a href="#subscribe-section1" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">JOIN US</a> </li>
+                                    <li class="nav-button propClone sm-no-margin-tb float-left btn-medium sm-no-margin-left"> 
+                                    {% if isChinese == "True"%}
+                                    <a href="/" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">English</a> 
+                                    {% else %}
+                                    <a href="/zh" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">中文</a> 
+                                    {% endif %}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
