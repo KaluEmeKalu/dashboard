@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from . models import (
     Button,
+    Blog,
     Widget,
     FirstSection,
     Image,
@@ -22,7 +23,9 @@ from . models import (
     TwelfthSection,
     ThirteenthSection,
     Footer,
-    Icon
+    Icon,
+    Article,
+    Text,
 )
 
 
@@ -127,6 +130,14 @@ class TwelfthSectionAdmin(admin.ModelAdmin):
     list_display = ['title', 'subtitle', 'image']
 
 
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'content', 'featured_image']
+
+
+
+
+
+admin.site.register(Blog, BlogAdmin)
 admin.site.register(Icon, IconAdmin)
 admin.site.register(Footer, FooterAdmin)
 admin.site.register(TwelfthSection, TwelfthSectionAdmin)

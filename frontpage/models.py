@@ -8,7 +8,7 @@ from . models_utils import (
     Image
 )
 
-from dashboard.models import Article
+from dashboard.models import Article, Text
 
 from django.db.models import (
     CharField,
@@ -26,43 +26,29 @@ from django.db.models import (
 )
 
 
-class Video(NameTimeStampBaseModel):
-    file = FileField(null=True, blank=True, upload_to=video_upload_location)
-
-
-class MailingListEntry(TimeStampBaseModel):
-    email = CharField(max_length=180, null=True, blank=True)
-    name = CharField(max_length=180, null=True, blank=True)
-
-
-class Widget(TimeStampBaseModel):
-    text = CharField(max_length=180, null=True, blank=True)
-    icon = CharField(max_length=100, null=True, blank=True)
-    count = IntegerField(default=0, null=True, blank=True)
-    text_2 = CharField(max_length=180, null=True, blank=True)
-
-    def __str__(self):
-        return self.text
-
-
-class Subsection(TimeStampBaseModel):
-    title = CharField(max_length=180, null=True, blank=True)
-    chinese_title = CharField(max_length=180, null=True, blank=True)
-
-    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
-    subtitle = CharField(max_length=180, null=True, blank=True)
-
-    button_text = CharField(max_length=180, null=True, blank=True)
-    chinese_button_text = CharField(max_length=180, null=True, blank=True)
-
-    chinese_content = TextField(null=True, blank=True)
+class Blog(TimeStampBaseModel):
+    title = CharField(max_length=380, null=True, blank=True)
     content = TextField(null=True, blank=True)
+    featured_image = ForeignKey(
+        'Image', related_name="blogs_fm", null=True, blank=True)
+    images = ManyToManyField('Image', blank=True, related_name="blogs_m" )
 
-    icon_class = CharField(max_length=180, null=True, blank=True)
+class Button(TimeStampBaseModel):
+    button_text = CharField(max_length=180, null=True, blank=True)
     button_text_url = CharField(max_length=180, null=True, blank=True)
 
-    def __str__(self):
-        return self.title
+
+class Footer(TimeStampBaseModel):
+    text = TextField(null=True, blank=True)
+    image = ForeignKey(
+        'Image', related_name="footers", null=True, blank=True)
+    icons = ManyToManyField('Icon', blank=True,
+                            related_name='footers')
+
+
+class Icon(TimeStampBaseModel):
+    icon = CharField(max_length=180, null=True, blank=True)
+    url = CharField(max_length=180, null=True, blank=True)
 
 
 class ImageSubsection(TimeStampBaseModel):
@@ -89,17 +75,29 @@ class ImageSubsection(TimeStampBaseModel):
         return self.title
 
 
-class Icon(TimeStampBaseModel):
-    icon = CharField(max_length=180, null=True, blank=True)
-    url = CharField(max_length=180, null=True, blank=True)
+class MailingListEntry(TimeStampBaseModel):
+    email = CharField(max_length=180, null=True, blank=True)
+    name = CharField(max_length=180, null=True, blank=True)
 
 
-class Footer(TimeStampBaseModel):
-    text = TextField(null=True, blank=True)
-    image = ForeignKey(
-        'Image', related_name="footers", null=True, blank=True)
-    icons = ManyToManyField('Icon', blank=True,
-                            related_name='footers')
+class Subsection(TimeStampBaseModel):
+    title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
+
+    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
+    subtitle = CharField(max_length=180, null=True, blank=True)
+
+    button_text = CharField(max_length=180, null=True, blank=True)
+    chinese_button_text = CharField(max_length=180, null=True, blank=True)
+
+    chinese_content = TextField(null=True, blank=True)
+    content = TextField(null=True, blank=True)
+
+    icon_class = CharField(max_length=180, null=True, blank=True)
+    button_text_url = CharField(max_length=180, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class UserProfile(TimeStampBaseModel):
@@ -117,11 +115,25 @@ class UserProfile(TimeStampBaseModel):
         return self.user.username
 
 
-class Button(TimeStampBaseModel):
-    button_text = CharField(max_length=180, null=True, blank=True)
-    button_text_url = CharField(max_length=180, null=True, blank=True)
+class Video(NameTimeStampBaseModel):
+    file = FileField(null=True, blank=True, upload_to=video_upload_location)
 
 
+class Widget(TimeStampBaseModel):
+    text = CharField(max_length=180, null=True, blank=True)
+    icon = CharField(max_length=100, null=True, blank=True)
+    count = IntegerField(default=0, null=True, blank=True)
+    text_2 = CharField(max_length=180, null=True, blank=True)
+
+    def __str__(self):
+        return self.text
+
+
+####################
+
+# Numbered Sections
+
+####################
 class FirstSection(TimeStampBaseModel):
     image = ForeignKey('Image', related_name="slides", null=True, blank=True)
     section = ForeignKey('Subsection', related_name='slides',
@@ -255,6 +267,7 @@ class EleventhSection(TimeStampBaseModel):
                         related_name='eleven_section_twos')
     blog_3 = ForeignKey(Article, null=True, blank=True,
                         related_name='eleven_section_threes')
+    articles = ManyToManyField(Article, blank=True, related_name="eleven_sections")
 
 
 class TwelfthSection(TimeStampBaseModel):

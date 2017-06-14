@@ -1,0 +1,6 @@
+beautifulsoup4
+django-imagekit
+django-widige-tweaks
+Pillow
+beautifulsoup4
+django-ipware

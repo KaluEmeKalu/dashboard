@@ -153,7 +153,7 @@ class AnkiImportTextFieldAdmin(admin.ModelAdmin):
 
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ['file', 'name', 'timestamp', 'updated']
+    list_display = ['name', 'file', 'timestamp', 'updated']
 
 
 class CompletedExamAdmin(admin.ModelAdmin):

@@ -19,6 +19,9 @@ import json
 from django.template.loader import render_to_string
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import zipfile
+from ipware.ip import get_ip
+from django.contrib.gis.geoip import GeoIP
+
 # import StringIO
 
 
@@ -630,6 +633,17 @@ def index(request):
 @login_required(login_url="/dashboard/login/")
 def dashboard(request, school_class_id=None):
 
+    # get country their from
+    ip = get_ip(request)
+    if ip:
+        g = GeoIP()
+        country = g.country(ip)
+        country = country['country_name']
+    else:
+        country = None
+
+
+
     # this if/else statement handles
     # mapping to urls with a class id and those without.
     if school_class_id:
@@ -654,7 +668,8 @@ def dashboard(request, school_class_id=None):
     students = make_2d_arrays(students)
 
     context = {'students': students, 'school_class': school_class,
-               'post_form': post_form, 'posts': posts}
+               'post_form': post_form, 'posts': posts,
+               'country': country}
 
     # pass school_class_user_table to context if user athenticated
     if request.user.is_authenticated():

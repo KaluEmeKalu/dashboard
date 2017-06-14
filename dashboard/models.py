@@ -975,6 +975,8 @@ class Article(Model):
                       related_name="articles")
 
 
+
+
     def get_texts(self):
         """
         return colleciton of articles if exists,
@@ -985,6 +987,10 @@ class Article(Model):
             return all_texts
         except:
             return []
+
+    def get_intro(self):
+        texts = self.get_texts()
+        return texts[0].content
 
     def __str__(self):
         return self.title
@@ -1297,6 +1303,9 @@ class Video(Model):
     order = models.IntegerField(default=0)
     watched = BooleanField(default=False)
     has_achievement = BooleanField(default=False)
+    youtube_embed_link = CharField(max_length=300, null=True, blank=True)
+    youku_embed_link = CharField(max_length=300, null=True, blank=True)
+    other_link = CharField(max_length=300, null=True, blank=True)
 
     def toggle_user_completed_video(self, user, step):
         try:
