@@ -650,7 +650,10 @@ def dashboard(request, school_class_id=None):
     if school_class_id:
         school_class = get_object_or_404(SchoolClass, pk=int(school_class_id))
     else:
-        school_class = SchoolClass.objects.first()
+        try:
+            school_class = SchoolClass.objects.get(pk=5)
+        except:
+            school_class = SchoolClass.objects.first()
 
     try:
         school_class.give_students_class_achievement()

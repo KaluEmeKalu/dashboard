@@ -10,11 +10,14 @@
         <!-- First Row  -->
         <div class="col-md-12">
                <h2>
-               Exam
+               {{exam.name}}
                {% if exam_paper.is_turned_in %}
                Score: {{ exam_paper.get_score  }}
                {% else %}
-               <!--  -->
+               <br>
+               <a href="{% url 'dashboard:exam' turn_in='true' exam_id=exam.id  %}">
+                 <button class="btn btn-danger btn-fill btn-just-icon">Turn In Exam</button>
+               </a>
                {% endif %}
                </h2>   
                   <h5>Please answer the questions below.</h5>
@@ -56,7 +59,7 @@
                             <div class="answer_body panel-body">
 
                                 {% for answer in question.get_answers %}
-                                   <span class="an_answer my_pointer" onclick="saveAnswer({{answer.id}}, {{exam_paper.id}}, {{question.id}})" id="answer{{answer.id}}">
+                                   <span class="cursor an_answer my_pointer" onclick="saveAnswer({{answer.id}}, {{exam_paper.id}}, {{question.id}})" id="answer{{answer.id}}">
                                    {{forloop.counter | to_char}}) - {{answer.answer}}
                                    </span></br></br>
                                 {% endfor %}
