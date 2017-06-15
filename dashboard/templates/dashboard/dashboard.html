@@ -5,123 +5,130 @@
 {% block content %}
 
 <div class="content">
-    <div class="container-fluid">
+  <div class="container-fluid">
+
+    <h3 class="title text-center">{{school_class.name}}</h3>
+    <span class="percentage_class">{{school_class_user_table.get_percentage_complete}}</span>%
+    <!-- Progress Bar -->
+    <div class="progress progress-striped ">
+      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width:{{school_class_user_table.get_percentage_complete}}%">
+        <span class="sr-only">{{school_class_user_table.get_percentage_complete}}% Complete</span>
+      </div>
+    </div>
+
+    <div class="tab-content">
+
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">{{school_class.name}} -
+                  <small class="category">Lessons</small>
+              </h4>
+          </div>
+          <div class="card-content">
+              <div class="row">
+                  <div class="col-md-4">
+
+
+                      <!-- Navigation -->
+                      <ul class="nav nav-pills nav-pills-icons nav-pills-rose nav-stacked" role="tablist">
+
+                          {% for step in school_class.get_published_steps %}
+                              <li class="{%   if forloop.first %}active{% endif %}">
+                                  <a href="#step{{step.id}}" role="tab" data-toggle="tab">
+                                      <i class="material-icons">dashboard</i> Lesson {{ forloop.counter }}) {{step.name}}
+                                  </a>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                      <!-- End Navigation  -->
+
+
+                  </div>
+                  <div class="col-md-8">
+                      <div class="tab-content">
+
+                          <!-- Step Content -->
+                          {% for step in school_class.get_published_steps %}
+                          <div class="tab-pane {% if forloop.first %}active{% endif %}" id="step{{step.id}}">
+                              
+                              {{step.description}}<br>
 
 
 
-                <h3 class="title text-center">{{school_class.name}}</h3>
-                <span class="percentage_class">{{school_class_user_table.get_percentage_complete}}</span>%
-                            <!-- Progress Bar -->
-                            <div class="progress progress-striped ">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{school_class.get_percentage_completed}}" aria-valuemin="0" aria-valuemax="100" style="width:{{school_class_user_table.get_percentage_complete}}%">
-                                <span class="sr-only">{{school_class_user_table.get_percentage_complete}}% Complete</span>
-                              </div>
-                            </div>
+                              <!-- Videoes And Video Modal -->
+                              {% for video in step.videos.all %}
+
+                              <label checked onchange="mark_video_watched({{video.id}}, {{step.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
+                                  <input name="optionsCheckboxes" {% if video.id in completed_videos_ids %} checked {% endif %} type="checkbox">
+                                  <span class="checkbox-material"><span class="check"></span></span>
+                              </label><i class="fa fa-video-camera fa-fw"></i>{{video.name}}
+                              {% if video.youtube_link or video.youtube_link %}
+                              <span data-toggle="tooltip" data-placement="top" title="Switch to Youku Player!" id="videoIcon{{video.id}}"  onclick="switchVideoPlayer({{video.id}})" class="cursor fa-stack fa-pull-right fa-border fa-1x fa-lg">
+                                <i  class="fa fa-youtube  fa-stack-1x"></i>
+                                <i id="redX" class="fa fa-ban fa-stack-2x text-danger"></i>
+                              </span>
+                              <br>
+                              {% endif %}
+
+                              <!-- Show Video Player Embed Link -->
+                              {% if video.youtube_link or video.youtube_link %}
 
 
-        
-                <div class="tab-content">
+                                {% if country != "United States" %}
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">{{school_class.name}} -
-                                        <small class="category">Lessons</small>
-                                    </h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                  <span data-youku-id="{{video.get_youku_id}}" data-youtube-id="{{video.get_youtube_id}}" data-video-player="youku" id="videoPlayer{{video.id}}">{{ video.get_youku_embed_link | safe}}</span>
+                                {% else %}
+                                  
+                                  <span data-youku-id="{{video.get_youku_id}}" data-youtube-id="{{video.get_youtube_id}}" data-video-player="youtube" id="videoPlayer{{video.id}}">{{ video.get_youtube_embed_link | safe}}</span>
+                                {% endif %}
 
 
-                                            <!-- Navigation -->
-                                            <ul class="nav nav-pills nav-pills-icons nav-pills-rose nav-stacked" role="tablist">
+                              {% else %}                        
 
-                                                {% for step in school_class.get_published_steps %}
-                                                    <li class="{%   if forloop.first %}active{% endif %}">
-                                                        <a href="#step{{step.id}}" role="tab" data-toggle="tab">
-                                                            <i class="material-icons">dashboard</i> Lesson {{ forloop.counter }}) {{step.name}}
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                            <!-- End Navigation  -->
+                                <a class="video_modal_link"  data-toggle="modal" data-target="#video{{video.id}}" href="" onclick="loadVideo({{video.id}})">
+                                  <p>
 
+                                      <i class="fa fa-video-camera fa-fw"></i>
+                                      {{video.name}}
+                                  </p>
+                                </a><br>
+                              {% endif %}
 
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="tab-content">
+                                  <!-- Video Modal -->    
+                                  <div class="modal fade myModal" id="video{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                  <h4 class="modal-title" id="myModalLabel">{{video.name}}</h4>
+                                              </div>
 
-                                                <!-- Step Content -->
-                                                {% for step in school_class.get_published_steps %}
-                                                <div class="tab-pane {% if forloop.first %}active{% endif %}" id="step{{step.id}}">
-                                                    
-                                                    {{step.description}}<br>
+                                              <div class="modal-body">
 
+                                                  
+                                              </div>
 
-
-                                                    <!-- Videoes And Video Modal -->
-                                                    {% for video in step.videos.all %}
-
-                                                    <label checked onchange="mark_video_watched({{video.id}}, {{step.id}})" id="video_input{{video.id}}" class="videoWatchedCheckmark checkbox">
-                                                        <input name="optionsCheckboxes" {% if video.id in completed_videos_ids %} checked {% endif %} type="checkbox">
-                                                        <span class="checkbox-material"><span class="check"></span></span>
-                                                    </label>                            
-
-                                                      <a class="video_modal_link"  data-toggle="modal" data-target="#video{{video.id}}" href="" onclick="loadVideo({{video.id}})">
-                                                        <p>
-
-                                                            <i class="fa fa-video-camera fa-fw"></i>
-                                                            {{video.name}}
-                                                        </p>
-                                                      </a><br>
-                                                      <!-- <video width="320" height="240" controls>
-                                                        <source src="{{video.file.url}}" type="video/mp4">
-                                                        <source src="{{video.file.url}}" type="video/webm">
-                                                        Your browser does not support the video tag.
-                                                      </video>
-                                                      <br> -->
-
-                                                        <!-- Video Modal -->    
-                                                        <div class="modal fade myModal" id="video{{video.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel">{{video.name}}</h4>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-                                                                        <!-- <video width="320" height="240" controls>
-                                                                            <source src="{{video.file.url}}" type="video/mp4">
-                                                                            <source src="{{video.file.url}}" type="video/webm">
-                                                                            Your browser does not support the video tag.
-                                                                        </video>
-                                                                        <br> -->
-
-                                                                        
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Video Modal -->
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- End Video Modal -->
 
 
-                                                    
-                                                    {% endfor %}
-                                                    <!-- End Videoes And Video Modal -->
+                              
+                              {% endfor %}
+                              <!-- End Videoes And Video Modal -->
 
-                                                </div>
-                                                {% endfor %}
-                                                <!-- End Step Content -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                          </div>
+                          {% endfor %}
+                          <!-- End Step Content -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
     </div>
 </div>

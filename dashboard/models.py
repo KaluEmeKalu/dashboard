@@ -1303,9 +1303,82 @@ class Video(Model):
     order = models.IntegerField(default=0)
     watched = BooleanField(default=False)
     has_achievement = BooleanField(default=False)
+    youtube_link = CharField(max_length=300, null=True, blank=True)
+    youku_link = CharField(max_length=300, null=True, blank=True)
     youtube_embed_link = CharField(max_length=300, null=True, blank=True)
     youku_embed_link = CharField(max_length=300, null=True, blank=True)
     other_link = CharField(max_length=300, null=True, blank=True)
+
+    def get_youtube_embed_link(self):
+        if self.youtube_embed_link:
+            return self.youtube_embed_link
+        elif self.youtube_link:
+            html = '<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/'
+            html += str(self.get_youtube_id())
+            html += '" width="640" height="360" frameborder="0"style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>'
+            return html
+        return None
+
+    def get_youku_embed_link(self):
+        if self.youku_embed_link:
+            return self.youku_embed_link
+        elif self.youku_link:
+            html = '<embed src="http://player.youku.com/player.php/sid/'
+            html += str(self.get_youku_id)
+            html += '==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>'
+            return html
+        return None
+
+
+    def get_youtube_id(self):
+
+        try:
+            link = self.youtube_link
+
+            if link:  # get id from youtube_link
+                start_pos = link.find('watch?v=')
+                start_pos = link.find('=', start_pos) + 1
+                youtube_id = link[start_pos:]
+            elif self.youtube_embed_link:  # get id from YT embed link
+                link = self.youtube_embed_link
+                start_pos = link.find("embed/")
+                start_pos = link.find("/", start_pos) + 1
+                end_pos = link.find('"', start_pos)
+                youtube_id = link[start_pos:end_pos]
+            else:
+                return None
+
+        except:
+            return None
+
+        return youtube_id
+
+
+    def get_youku_id(self):
+
+        try:
+            link = self.youku_link
+
+            if link:  # get id from youtube_link
+                start_pos = link.find('id_')
+                start_pos = link.find('_', start_pos) + 1
+                end_pos = link.find('==', start_pos)
+                youku_id = link[start_pos: end_pos]
+            elif self.youku_embed_link:  # get id from YT embed link
+                link = self.youku_embed_link
+                start_pos = link.find('sid/')
+                start_pos = link.find('/', start_pos) + 1
+                end_pos = link.find('==', start_pos)
+                youku_id = link[start_pos: end_pos]
+            else:
+                return None
+
+        except:
+            return None
+
+        return youku_id
+
+
 
     def toggle_user_completed_video(self, user, step):
         try:

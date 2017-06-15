@@ -1,20 +1,8 @@
-{% if video.youtube_embed_link or video.youtube_embed_link %}
-
-
-	{% if country != "China" %}
-		{{ video.youtube_embed_link | safe}}
-	{% else %}
-		{{ video.youku_embed_link | safe}}
+<video id="cute" width="320" height="240" controls>
+	{% if video.file %}
+	<source src="{{video.file.url}}" type="video/mp4">
+	<source src="{{video.file.url}}" type="video/webm">
+	Your browser does not support the video tag.
 	{% endif %}
-
-{% else %}
-
-	<video id="cute" width="320" height="240" controls>
-		<source src="{{video.file.url}}" type="video/mp4">
-		<source src="{{video.file.url}}" type="video/webm">
-		Your browser does not support the video tag.
-	</video>
-	<br>
-
-
-{% endif %}
+</video>
+<br>

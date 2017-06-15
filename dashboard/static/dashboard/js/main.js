@@ -267,7 +267,6 @@ function mark_video_watched(video_id, step_id) {
 // Load Video
 function loadVideo(video_id) {
     vid_url = post_url + "video/" + video_id +"/";
-    console.log(vid_url);
     $.ajax({
         type: "GET",
         url: vid_url,
@@ -276,7 +275,6 @@ function loadVideo(video_id) {
 
         success: function(data) {
             $( "#video" + video_id + " .modal-body" ).html(data);
-            console.log(vid_url);
         },//success close
 
         error: function(json) {
@@ -301,3 +299,53 @@ $('.myModal').modal({
 }).on('hidden.bs.modal', function(){
     $(this).find('video')[0].pause();
 });
+
+function make_youtube_embed(youtube_id) {
+    html = '<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/';
+    html += youtube_id;
+    html += '" width="640" height="360" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>';
+    return html;
+}
+
+function make_youku_embed(youku_id) {
+    html = '<embed src="http://player.youku.com/player.php/sid/';
+    html += youku_id;
+    html += '==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>';
+
+    return html;
+}
+
+//Switch Media Player
+function switchVideoPlayer(video_id) {
+
+
+    var youku_tooltip = "Switch to Youku Player";
+    var youtube_tooltip = "Switch to Youtube Player!";
+    var redXClass = "fa fa-ban fa-stack-2x text-danger";
+    var video_span = $('#videoPlayer' + video_id);  
+    var video_icon = $('#videoIcon' + video_id + " #redX");
+    console.log(video_icon);
+    var youtube_id = video_span.data("youtube-id");
+    var youku_id = video_span.data("youku-id");
+    var video_player = video_span.data('video-player');
+    console.log("yo, clicked!", video_id, video_player, video_span);
+
+    if (video_player == "youku") {
+        html = make_youtube_embed(youtube_id);
+        video_span.html(html);
+        video_span.data('video-player', 'youtube');
+        video_icon.attr("class", "");
+        video_icon.attr("title", "Switch to Youtube Player!");
+
+    } else if (video_player == "youtube") {
+        html = make_youku_embed(youku_id);
+        console.log(youku_id);
+
+        video_span.html(html);
+        video_span.data('video-player', 'youku');
+        video_icon.attr("class", redXClass);
+        video_icon.attr("title", "Switch to Youku Player!");
+    }
+
+
+}

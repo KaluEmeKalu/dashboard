@@ -634,13 +634,14 @@ def index(request):
 def dashboard(request, school_class_id=None):
 
     # get country their from
+    country = "None"
     ip = get_ip(request)
     if ip:
         g = GeoIP()
         country = g.country(ip)
         country = country['country_name']
     else:
-        country = None
+        pass
 
 
 
