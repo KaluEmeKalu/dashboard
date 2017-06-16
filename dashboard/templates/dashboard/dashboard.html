@@ -121,6 +121,13 @@
                               {% endfor %}
                               <!-- End Videoes And Video Modal -->
 
+                              <!-- Exam -->
+                              {% if step.exam %}
+                                <a href="{{ step.exam.get_absolute_url }}">{{step.exam.name}}</a>
+                                ll
+                              {% endif %}
+                              <!-- EndExam -->
+
                           </div>
                           {% endfor %}
                           <!-- End Step Content -->

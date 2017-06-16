@@ -309,8 +309,8 @@ class Exam(NameTimeStampBaseModel):
     def get_absolute_url(self):
         isDS = settings.IS_DEPLOYMENT_SERVER
         try:
-            dsURL = 'http://112.74.48.237/exam/'
-            psURL = 'http://127.0.0.1:8000/exam/'
+            dsURL = 'http://112.74.48.237/dashboard/exam/'
+            psURL = 'http://127.0.0.1:8000/dashboard/exam/'
             url = dsURL if isDS else psURL
             return url + str(self.id)
         except Exception as e:
