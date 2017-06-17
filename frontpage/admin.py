@@ -71,7 +71,7 @@ class ImageSubsectionAdmin(admin.ModelAdmin):
 
 
 class SixthSectionAdmin(admin.ModelAdmin):
-    list_display = ['subsection', 'video']
+    list_display = ['subsection', 'video_embed_url']
 
 
 class SeventhSectionAdmin(admin.ModelAdmin):

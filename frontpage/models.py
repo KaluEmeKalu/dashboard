@@ -204,8 +204,7 @@ class FifthSection(TimeStampBaseModel):
 class SixthSection(TimeStampBaseModel):
     subsection = ForeignKey('Subsection', null=True,
                             blank=True, related_name='sixth_sections')
-    video = ForeignKey('Video', null=True, blank=True,
-                       related_name='sixth_sections')
+    video_embed_url = TextField(null=True, blank=True)
 
 
 class SeventhSection(TimeStampBaseModel):
