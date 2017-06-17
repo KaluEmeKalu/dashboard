@@ -110,7 +110,7 @@ class TenthSectionAdmin(admin.ModelAdmin):
                     'widget_3', 'widget_4']
 
 class EleventhSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'blog_1', 'blog_2', 'blog_3']
+    list_display = ['title']
 
 
 class ThirteenthSectionAdmin(admin.ModelAdmin):

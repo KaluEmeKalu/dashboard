@@ -260,12 +260,6 @@ class TenthSection(TimeStampBaseModel):
 class EleventhSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
-    blog_1 = ForeignKey(Article, null=True, blank=True,
-                        related_name='eleven_section_ones')
-    blog_2 = ForeignKey(Article, null=True, blank=True,
-                        related_name='eleven_section_twos')
-    blog_3 = ForeignKey(Article, null=True, blank=True,
-                        related_name='eleven_section_threes')
     articles = ManyToManyField(Article, blank=True, related_name="eleven_sections")
 
 
