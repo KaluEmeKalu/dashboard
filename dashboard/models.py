@@ -1324,7 +1324,7 @@ class Video(Model):
             return self.youku_embed_link
         elif self.youku_link:
             html = '<embed src="http://player.youku.com/player.php/sid/'
-            html += str(self.get_youku_id)
+            html += str(self.get_youku_id())
             html += '==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>'
             return html
         return None
