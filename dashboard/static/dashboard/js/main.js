@@ -229,6 +229,27 @@ function saveAnswer(answer_id, exam_paper_id, question_id) {
     });//ajax close
 }//function Create Class close
 
+
+// Show Notification
+function showNotification(from, align, message){
+        type = ['','info','success','warning','danger','rose','primary'];
+
+        color = Math.floor((Math.random() * 6) + 1);
+
+        $.notify({
+            icon: "notifications",
+            message: message
+
+        },{
+            type: type[color],
+            timer: 500,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
+
 // Mark Video Watched
 function mark_video_watched(video_id, step_id) {
     vid_url = post_url + "mark_video_watched/" + step_id +'/' + video_id +"/";
@@ -257,6 +278,13 @@ function mark_video_watched(video_id, step_id) {
             // Update Progress Bar
             $('.percentage_class').html(data.percentage);
             $('.progress-bar.progress-bar-info').css('width', data.percentage + '%');
+
+            // If percentage 100% Say class completed!
+            course_name = $('#course_title').html() ;
+            message = "Congratulations! You've completed the " + course_name + " course.";
+            if (data.percentage === 100) {
+                showNotification('top','right', message);
+            }
 
         }//success close
 
@@ -349,3 +377,5 @@ function switchVideoPlayer(video_id) {
 
 
 }
+
+
