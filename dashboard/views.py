@@ -636,7 +636,7 @@ def index(request):
     courses = SchoolClass.objects.all()
     # separate list into lists of 3
     courses = list(chunks(courses, 3))
-    context = {'courses': courses}
+    context = {'course_rows': courses}
 
 
     return render(request, 'dashboard/index.html', context)
