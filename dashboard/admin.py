@@ -29,6 +29,7 @@ from .models import (
     CompletedVideo,
     SchoolClassUserTable,
     CompletedVideo,
+    VideoAchievement,
     Word)
 
 
@@ -128,7 +129,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class AchievementAdmin(admin.ModelAdmin):
-    list_display = ['name', 'message', 'points',
+    list_display = ['name', 'message', 'points', 'timestamp', 'updated',
                     'school_class', 'created_by', 'step']
 
 
@@ -172,6 +173,10 @@ class SchoolClassUserTableAdmin(admin.ModelAdmin):
     list_display = ['user', 'school_class']
 
 
+class VideoAchievementAdmin(admin.ModelAdmin):
+    list_display = ['video', 'achievement', 'user']
+
+admin.site.register(VideoAchievement, VideoAchievementAdmin)
 admin.site.register(SchoolClassUserTable, SchoolClassUserTableAdmin)
 admin.site.register(CompletedArticle, CompletedArticleAdmin)
 admin.site.register(CompletedExam, CompletedExamAdmin)

@@ -624,10 +624,22 @@ def make_2d_arrays(your_list):
         final_list.append(your_list)
     return final_list
 
+def chunks(l, n):
+    """Yield successive n-sized chunks from l."""
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
 
 def index(request):
     make_all_user_profiles()
-    return render(request, 'dashboard/index.html')
+
+    courses = SchoolClass.objects.all()
+    # separate list into lists of 3
+    courses = list(chunks(courses, 3))
+    context = {'courses': courses}
+
+
+    return render(request, 'dashboard/index.html', context)
 
 
 @login_required(login_url="/dashboard/login/")

@@ -406,6 +406,17 @@ class SchoolClass(Model):
         editable=False, auto_now_add=True, auto_now=False)
     private = BooleanField(default=False, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
+    description = TextField(null=True, blank=False)
+
+    def get_all_videos(self):
+        steps = self.steps.all()
+        videos = []
+        for step in steps:
+
+            for video in step.videos.all():
+                videos.append(video)
+        return videos
+
 
 
     def get_school_class_user_table(self, user):
@@ -475,8 +486,17 @@ class SchoolClass(Model):
         user_achievements = user.user_achievements.filter(achievement__school_class=self)
         video_achievements = user.video_achievements.filter(achievement__school_class=self)
 
+        videos_in_achievements = [video_achievement.video for
+                                  video_achievement in video_achievements]
+
+        video_achievements = [video for video in
+                              videos_in_achievements if
+                              video in self.get_all_videos()]
+
         user_achievements_count = len(user_achievements) +  \
                                   len(video_achievements)
+        video_achievements = user.video_achievements.filter(achievement__school_class=self)
+        # FIX THE 120% ISSUE!!
 
         percentage = float(user_achievements_count) / total_achievements_count
         percentage = int(round(percentage * 100))
@@ -868,6 +888,13 @@ class ZipStored(Model):
 
 
 class StepHelper(NameTimeStampBaseModel):
+
+    def video_count(self):
+        return len(self.videos.all())
+
+
+    def get_videos(self):
+        return [video for video in self.videos.all()]
 
 
     def get_total_substeps(self):
