@@ -18,7 +18,8 @@
     <link href="{% static 'dashboard/css/demo.css' %}" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link href="{% static 'dashboard/css/font-awesome.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+    <link href="{% static 'dashboard/css/roboto_material_icons.css' %}" rel="stylesheet">
+    
 </head>
 
 {% block body %}
@@ -31,7 +32,7 @@
         Tip 3: you can change the color of the sidebar with data-background-color="white | black"
     -->
             <div class="logo">
-                <a href="{% url 'frontpage:index' %}"><img src="{% static 'dashboard/img/jxfls_logo.png' %}"></a>
+                <a href="{% url 'dashboard:index' %}"><img src="{% static 'dashboard/img/jxfls_logo.png' %}"></a>
             </div>
             <div class="logo logo-mini">
                 <a href="http://www.creative-tim.com" class="simple-text">

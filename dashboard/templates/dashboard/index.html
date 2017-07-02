@@ -38,7 +38,7 @@
                         </button>
                     </div>
                     <h4 class="card-title">
-                        <a href="#pablo">{{course.name}}</a>
+                        <a href="{{course.get_absolute_url}}">{{course.name}}</a>
                     </h4>
                     <div class="card-description">
                         {% if course.description %}

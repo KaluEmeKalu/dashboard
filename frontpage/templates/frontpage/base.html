@@ -103,7 +103,13 @@
                     <!-- end logo -->
                     <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12 sm-margin-three-bottom text-center xs-text-center display-table">
                         <div class="display-table-cell-vertical-middle">
-                            <span class="tz-text">&copy; {{footer.text}}</span>
+                            <span class="tz-text">&copy; 
+                            {% if isChinese == "True" and footer.chinese_text %}
+                            {{footer.chinese_text}}
+                            {% else %}
+                            {{footer.text}}
+                            {% endif %}
+                            </span>
                         </div>
                     </div>
                     <!-- social elements -->

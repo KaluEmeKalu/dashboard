@@ -40,6 +40,7 @@ class Button(TimeStampBaseModel):
 
 class Footer(TimeStampBaseModel):
     text = TextField(null=True, blank=True)
+    chinese_text = TextField(null=True, blank=True)
     image = ForeignKey(
         'Image', related_name="footers", null=True, blank=True)
     icons = ManyToManyField('Icon', blank=True,
@@ -109,6 +110,7 @@ class UserProfile(TimeStampBaseModel):
     is_faculty = BooleanField(default=False)
     points = IntegerField(default=0, blank=True, null=True)
     job_title = CharField(max_length=180, null=True, blank=True)
+    chinese_job_title = CharField(max_length=180, null=True, blank=True)
     user = OneToOneField(User, related_name="profile")
 
     def __str__(self):
@@ -121,9 +123,11 @@ class Video(NameTimeStampBaseModel):
 
 class Widget(TimeStampBaseModel):
     text = CharField(max_length=180, null=True, blank=True)
+    chinese_text = CharField(max_length=180, null=True, blank=True)
     icon = CharField(max_length=100, null=True, blank=True)
     count = IntegerField(default=0, null=True, blank=True)
     text_2 = CharField(max_length=180, null=True, blank=True)
+    chinese_text_2 = CharField(max_length=180, null=True, blank=True)
 
     def __str__(self):
         return self.text

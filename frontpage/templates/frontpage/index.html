@@ -189,12 +189,40 @@
                 <div class="row equalize xs-equalize-auto equalize-display-inherit">
                     <div class="col-lg-6 col-md-6 col-sm-6 xs-12 xs-text-center xs-margin-nineteen-bottom display-table" style="">
                         <div class="display-table-cell-vertical-middle">
-                            <div class="margin-three-bottom sm-margin-five-bottom alt-font text-dark-gray font-weight-600 text-medium tz-text">{{third_subsection.section.subtitle}}</div>
+                            <div class="margin-three-bottom sm-margin-five-bottom alt-font text-dark-gray font-weight-600 text-medium tz-text">
+                            {% if isChinese == "True" and third_subsection.section.chinese_subtitle %}
+                            {{third_subsection.section.chinese_subtitle}}
+                            {% else %}
+                            {{third_subsection.section.subtitle}}
+                            {% endif %}
+                            
+                            </div>
                             <!-- section title -->
-                            <h2 class="alt-font title-extra-large sm-title-large xs-title-large text-red margin-eight-bottom tz-text sm-margin-ten-bottom">{{third_subsection.section.title}}</h2>
+                            <h2 class="alt-font title-extra-large sm-title-large xs-title-large text-red margin-eight-bottom tz-text sm-margin-ten-bottom">
+                            {% if isChinese == "True" and third_subsection.section.chinese_title %}
+                            {{third_subsection.section.chinese_title}}
+                            {% else %}
+                            {{third_subsection.section.title}}
+                            {% endif %}
+
+                            
+                            </h2>
                             <!-- end section title -->
-                            <div class="text-medium tz-text width-90 sm-width-100 margin-seven-bottom sm-margin-ten-bottom"><p>{{third_subsection.section.content}}</p></div>
-                            <a class="btn btn-medium propClone btn-circle bg-red text-white" href="#tab-section6"><span class="tz-text">{{third_subsection.section.button_text}}</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                            <div class="text-medium tz-text width-90 sm-width-100 margin-seven-bottom sm-margin-ten-bottom"><p>
+                            {% if isChinese == "True" and third_subsection.section.content_title %}
+                            {{third_subsection.section.content_title}}
+                            {% else %}
+                            {{third_subsection.section.content}}
+                            {% endif %}
+
+                            </p></div>
+                            <a class="btn btn-medium propClone btn-circle bg-red text-white" href="#tab-section6"><span class="tz-text">
+                            {% if isChinese == "True" and third_subsection.section.chinese_button_text %}
+                            {{third_subsection.section.chinese_button_text}}
+                            {% else %}
+                            {{third_subsection.section.button_text}}
+                            {% endif %}
+                            </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 xs-12 xs-text-center display-table" style="">
@@ -211,61 +239,177 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 tz-builder-bg-image sm-height-600-px xs-height-400-px cover-background bg-img-four" data-img-size="(W)1000px X (H)800px" style="background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)) repeat scroll 0% 0%, transparent url('{{fourth_subsection.image.image.url}}') repeat scroll 0% 0%;"></div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 display-table" style="">
                         <div class="display-table-cell-vertical-middle padding-twenty-two md-padding-seven xs-padding-nineteen xs-no-padding-lr">
-                            <h2 class="title-extra-large border-bottom-light font-weight-100 text-white xs-title-large padding-fifteen-bottom margin-fifteen-bottom tz-text sm-padding-ten-bottom sm-margin-ten-bottom"><span class="font-weight-600">{{fourth_subsection.section.title}}</span><br>{{fourth_subsection.section.subtitle}}</h2>                                
+                            <h2 class="title-extra-large border-bottom-light font-weight-100 text-white xs-title-large padding-fifteen-bottom margin-fifteen-bottom tz-text sm-padding-ten-bottom sm-margin-ten-bottom"><span class="font-weight-600">
+
+                            <!-- Title -->
+                            {% if isChinese == "True" and fourth_subsection.section.chinese_title %}
+                            {{fourth_subsection.section.chinese_title}}
+                            {% else %}
+                            {{fourth_subsection.section.title}}
+                            {% endif %}
+
+                            <!-- Subtitle -->
+                            </span><br>
+                            {% if isChinese == "True" and fourth_subsection.section.chinese_subtitle %}
+                            {{fourth_subsection.section.chinese_subtitle}}
+                            {% else %}
+                            {{fourth_subsection.section.subtitle}}
+                            {% endif %}
+                            </h2>                                
                             <div class="tab-style6">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <!-- tab navigation -->
                                         <ul class="nav nav-tabs nav-tabs-light alt-font text-left margin-ten-bottom">
-                                            <li class="active"><a href="#tab_sec1" data-toggle="tab"><span class="tz-text">{{fourth_subsection.subsection_1.title}}</span></a></li>
-                                            <li><a href="#tab_sec2" data-toggle="tab"><span class="tz-text">{{fourth_subsection.subsection_2.title}}</span></a></li>
-                                            <li><a href="#tab_sec3" data-toggle="tab"><span class="tz-text">{{fourth_subsection.subsection_3.title}}</span></a></li>
-                                            <li><a href="#tab_sec4" data-toggle="tab"><span class="tz-text">{{fourth_subsection.subsection_4.title}}</span></a></li>
+
+                                            <!-- Subsection 1 Modal Trigger -->
+                                            <li class="active"><a href="#tab_sec1" data-toggle="tab"><span class="tz-text">
+                                            {% if isChinese == "True" and fourth_subsection.subsection_1.chinese_title %}
+                                            {{fourth_subsection.subsection_1.chinese_title}}
+                                            {% else %}
+                                            {{fourth_subsection.subsection_1.title}}
+                                            {% endif %}                                            
+                                            </span></a></li>
+
+                                            <!-- Subsection 2 Modal Trigger -->
+                                            <li><a href="#tab_sec2" data-toggle="tab"><span class="tz-text">
+                                            {% if isChinese == "True" and fourth_subsection.subsection_2.chinese_title %}
+                                            {{fourth_subsection.subsection_2.chinese_title}}
+                                            {% else %}
+                                            {{fourth_subsection.subsection_2.title}}
+                                            {% endif %} 
+                                            </span></a></li>
+
+                                            <!-- Subsection 3 Modal Trigger -->
+                                            <li><a href="#tab_sec3" data-toggle="tab"><span class="tz-text">
+                                            {% if isChinese == "True" and fourth_subsection.subsection_3.chinese_title %}
+                                            {{fourth_subsection.subsection_3.chinese_title}}
+                                            {% else %}
+                                            {{fourth_subsection.subsection_3.title}}
+                                            {% endif %}
+                                            </span></a></li>
+
+                                            <!-- Subsection 4 Modal Trigger -->
+                                            <li><a href="#tab_sec4" data-toggle="tab"><span class="tz-text">
+                                            {% if isChinese == "True" and fourth_subsection.subsection_4.chinese_title %}
+                                            {{fourth_subsection.subsection_4.chinese_title}}
+                                            {% else %}
+                                            {{fourth_subsection.subsection_4.title}}
+                                            {% endif %}
+                                            </span></a></li>
                                         </ul>
                                         <!-- tab end navigation -->
                                     </div>
                                 </div>                                    
                                 <div class="tab-content">
+
+                                    <!-- Subsection 1 Modal Content -->
                                     <!-- tab content -->
                                     <div class="tab-pane med-text fade in active" id="tab_sec1">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="text-white tz-text"><p>{{fourth_subsection.subsection_1.content}}</p></div>
+                                                <div class="text-white tz-text"><p>
+                                                <!-- Content -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_1.chinese_content %}
+                                                {{fourth_subsection.subsection_1.chinese_content}}
+                                                {% else %}
+                                                {{fourth_subsection.subsection_1.content}}
+                                                {% endif %}
+                                                </p></div>
                                                 <div class="text-white tz-text"><p><!--Add Content Later --></p></div>
-                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">READ MORE</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">
+                                                    
+                                                <!-- Button -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_1.chinese_button_text %}
+                                                {{fourth_subsection.subsection_1.chinese_button_text}}
+                                                {% endif %}
+                                                {% if fourth_subsection.subsection_1.button_text %}
+                                                {{fourth_subsection.subsection_1.button_text}}
+                                                {% endif %}
+                                                </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- end tab content -->
+
+                                    <!-- Subsection 2 Modal Content -->
                                     <!-- tab content -->
                                     <div class="tab-pane fade in" id="tab_sec2">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="text-white tz-text"><p>{{fourth_subsection.subsection_2.content}}</p></div>
+                                                <div class="text-white tz-text"><p>
+                                                <!-- Content -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_2.chinese_content %}
+                                                {{fourth_subsection.subsection_2.chinese_content}}
+                                                {% else %}
+                                                {{fourth_subsection.subsection_2.content}}
+                                                {% endif %}
+                                                </p></div>
                                                 <div class="text-white tz-text"><p><!--Add Content Later --></p></div>
-                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">READ MORE</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">
+                                                <!-- Button -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_2.chinese_button_text %}
+                                                {{fourth_subsection.subsection_2.chinese_button_text}}
+                                                {% endif %}
+                                                {% if fourth_subsection.subsection_2.button_text %}
+                                                {{fourth_subsection.subsection_2.button_text}}
+                                                {% endif %}
+                                                </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- end tab content -->
+
+                                    <!-- Subsection 3 Modal Content -->
                                     <!-- tab content -->
                                     <div class="tab-pane fade in" id="tab_sec3">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="text-white tz-text"><p>{{fourth_subsection.subsection_3.content}}</p></div>
+                                                <div class="text-white tz-text"><p>
+                                                <!-- Content -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_3.chinese_content %}
+                                                {{fourth_subsection.subsection_3.chinese_content}}
+                                                {% else %}
+                                                {{fourth_subsection.subsection_3.content}}
+                                                {% endif %}
+                                                </p></div>
                                                 <div class="text-white tz-text"><p><!--Add Content Later --></p></div>
-                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">READ MORE</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">
+                                                <!-- Button -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_3.chinese_button_text %}
+                                                {{fourth_subsection.subsection_3.chinese_button_text}}
+                                                {% endif %}
+                                                {% if fourth_subsection.subsection_3.button_text %}
+                                                {{fourth_subsection.subsection_3.button_text}}
+                                                {% endif %}
+                                                </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- end tab content -->
+
+                                    <!-- Subsection 4 Modal Content -->
                                     <!-- tab content -->
                                     <div class="tab-pane fade in" id="tab_sec4">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="text-white tz-text"><p>{{fourth_subsection.subsection_4.content}}</p></div>
+                                                <div class="text-white tz-text"><p>
+                                                {% if isChinese == "True" and fourth_subsection.subsection_4.chinese_content %}
+                                                {{fourth_subsection.subsection_4.chinese_content}}
+                                                {% else %}
+                                                {{fourth_subsection.subsection_4.content}}
+                                                {% endif %}
+                                                </p></div>
                                                 <div class="text-white tz-text"><p><!--Add Content Later --></p></div>
-                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">READ MORE</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                                                <a class="btn btn-medium propClone btn-circle bg-white text-red margin-three-top" href="#title-section1"><span class="tz-text">
+                                                <!-- Button -->
+                                                {% if isChinese == "True" and fourth_subsection.subsection_4.chinese_button_text %}
+                                                {{fourth_subsection.subsection_4.chinese_button_text}}
+                                                {% endif %}
+                                                {% if fourth_subsection.subsection_4.button_text %}
+                                                {{fourth_subsection.subsection_4.button_text}}
+                                                {% endif %}
+                                                </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -282,7 +426,14 @@
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium text-dark-gray font-weight-600 alt-font margin-nine-bottom xs-no-margin-bottom tz-text">{{fifth_section.title}}</h2>
+                        <h2 class="section-title-large sm-section-title-medium text-dark-gray font-weight-600 alt-font margin-nine-bottom xs-no-margin-bottom tz-text">
+                        {% if isChinese == "True" and fifth_section.chinese_title %}
+                        {{fifth_section.chinese_title}}
+                        {% else %}
+                        {{fifth_section.title}}
+                        {% endif %}
+                        
+                        </h2>
                     </div>
                     <!-- end section title -->
                 </div>                    
@@ -295,29 +446,86 @@
                         <!-- feature box -->
                         <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
                             <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_1.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
-                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">{{fifth_section.subsection_1.title}}</h3>
-                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">{{fifth_section.subsection_1.content}}</p></div>
+                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
+                            <!-- Title -->
+                            {% if isChinese == "True" and fifth_section.subsection_1.chinese_title %}
+                            {{fifth_section.subsection_1.chinese_title}}
+                            {% else %}
+                            {{fifth_section.subsection_1.title}}
+                            {% endif %}
+                            </h3>
+                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
+                                <!-- Content -->
+                                {% if isChinese == "True" and fifth_section.subsection_1.chinese_content %}
+                                {{fifth_section.subsection_1.chinese_content}}
+                                {% else %}
+                                {{fifth_section.subsection_1.content}}
+                                {% endif %}
+                            </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
                         <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
                             <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_2.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
-                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">{{fifth_section.subsection_2.title}}</h3>
-                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">{{fifth_section.subsection_2.content}}</p></div>
+                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
+                            <!-- Title -->
+                            {% if isChinese == "True" and fifth_section.subsection_2.chinese_title %}
+                            {{fifth_section.subsection_2.chinese_title}}
+                            {% else %}
+                            {{fifth_section.subsection_2.title}}
+                            {% endif %}
+                            </h3>
+                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
+                            <!-- Content -->
+                                {% if isChinese == "True" and fifth_section.subsection_2.chinese_content %}
+                                {{fifth_section.subsection_2.chinese_content}}
+                                {% else %}
+                                {{fifth_section.subsection_2.content}}
+                                {% endif %}
+                            </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
                         <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
                             <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_3.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
-                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">{{fifth_section.subsection_3.title}}</h3>
-                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">{{fifth_section.subsection_3.content}}</p></div>
+                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
+
+                            <!-- Title -->
+                            {% if isChinese == "True" and fifth_section.subsection_3.chinese_title %}
+                            {{fifth_section.subsection_3.chinese_title}}
+                            {% else %}
+                            {{fifth_section.subsection_3.title}}
+                            {% endif %}
+                            </h3>
+                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
+                            <!-- Content -->
+                            {% if isChinese == "True" and fifth_section.subsection_3.chinese_content %}
+                            {{fifth_section.subsection_3.chinese_content}}
+                            {% else %}
+                            {{fifth_section.subsection_3.content}}
+                            {% endif %}
+                            </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
                         <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
                             <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_4.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
-                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">{{fifth_section.subsection_4.title}}</h3>
-                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">{{fifth_section.subsection_4.content}}</p></div>
+                            <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
+                            <!-- Title -->
+                            {% if isChinese == "True" and fifth_section.subsection_4.chinese_title %}
+                            {{fifth_section.subsection_4.chinese_title}}
+                            {% else %}
+                            {{fifth_section.subsection_4.title}}
+                            {% endif %}
+                            </h3>
+                            <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
+                            <!-- Content -->
+                            {% if isChinese == "True" and fifth_section.subsection_4.chinese_content %}
+                            {{fifth_section.subsection_4.chinese_content}}
+                            {% else %}
+                            {{fifth_section.subsection_4.content}}
+                            {% endif %}
+                            </p></div>
                         </div>
                         <!-- end feature box -->
                     </div>
@@ -330,9 +538,35 @@
                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 display-table xs-margin-fifteen-bottom">
                         <!-- section title -->
                         <div class="display-table-cell-vertical-middle">
-                            <h2 class="text-dark-gray title-extra-large alt-font line-height-40 sm-title-large xs-title-large margin-seven-bottom sm-margin-ten-bottom tz-text">{{sixth_section.subsection.title}}</h2>
-                            <div class="title-small sm-title-medium xs-title-medium width-90 sm-width-100 font-weight-300 margin-fourteen-bottom sm-margin-twelve-bottom tz-text">{{sixth_section.subsection.content}}</div>
-                            <a class="btn btn-medium propClone bg-red text-white text-white" href="{{sixth_section.subsection.button_text_url}}"><span class="tz-text">{{sixth_section.subsection.button_text}}</span></a>
+                            <h2 class="text-dark-gray title-extra-large alt-font line-height-40 sm-title-large xs-title-large margin-seven-bottom sm-margin-ten-bottom tz-text">
+
+                            <!-- Sixth Section Title -->
+                            {% if isChinese == "True" and sixth_section.subsection.chinese_title %}
+                            {{sixth_section.subsection.chinese_title}}
+                            {% else %}
+                            {{sixth_section.subsection.title}}
+                            {% endif %}
+
+                            
+                            </h2>
+                            <div class="title-small sm-title-medium xs-title-medium width-90 sm-width-100 font-weight-300 margin-fourteen-bottom sm-margin-twelve-bottom tz-text">
+
+                            <!-- Sixth Section Content -->
+                            {% if isChinese == "True" and sixth_section.subsection.chinese_content %}
+                            {{sixth_section.subsection.chinese_content}}}
+                            {% else %}
+                            {{sixth_section.subsection.content}}
+                            {% endif %}
+                            
+                            </div>
+                            <a class="btn btn-medium propClone bg-red text-white text-white" href="{{sixth_section.subsection.button_text_url}}"><span class="tz-text">
+                            <!-- Sixth Section Button Text -->
+                            {% if isChinese == "True" and sixth_section.subsection.chinese_button_text %}
+                            {{sixth_section.subsection.chinese_button_text}}
+                            {% else %}
+                            {{sixth_section.subsection.button_text}}
+                            {% endif %}
+                            </span></a>
                         </div>
                         <!-- end section title -->
                     </div>
@@ -352,8 +586,23 @@
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">{{seventh_section.title}}</h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">{{seventh_section.content}}</div>
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">
+                        <!-- Seventh Section Title -->
+                        {% if isChinese == "True" and seventh_section.chinese_title %}
+                        {{seventh_section.chinese_title}}
+                        {% else %}
+                        {{seventh_section.title}}
+                        {% endif %}
+                        
+                        </h2>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">
+                        <!-- Seventh Section Content -->
+                        {% if isChinese == "True" and seventh_section.chinese_content %}
+                        {{seventh_section.chinese_content}}
+                        {% else %}
+                        {{seventh_section.content}}
+                        {% endif %}
+                        </div>
                     </div>
                     <!-- end section title -->
                 </div>                    
@@ -369,11 +618,35 @@
                                 <!-- end team image -->
                                 <!-- team details -->
                                 <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text112">{{seventh_section.subsection_1.title}}</span>
-                                    <span class="text-small tz-text" id="tz-slider-text119"> {{seventh_section.subsection_1.content}}</span>
+                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text112">
+                                    <!-- Subsection Title -->
+                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_title %}
+                                    {{seventh_section.subsection_1.chinese_title}}
+                                    {% else %}
+                                    {{seventh_section.subsection_1.title}}
+                                    {% endif %}
+                                    
+                                    </span>
+                                    <span class="text-small tz-text" id="tz-slider-text119"> 
+                                    <!-- Subsection Content -->
+                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_content %}
+                                    {{seventh_section.subsection_1.chinese_content}}
+                                    {% else %}
+                                    {{seventh_section.subsection_1.content}}
+                                    {% endif %}
+                                    
+                                    </span>
                                     <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
                                     </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">{{seventh_section.subsection_1.button_text}}</span></a>
+                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">
+                                    <!-- Subsection Button Text -->
+                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_button_text %}
+                                    {{seventh_section.subsection_1.chinese_button_text}}
+                                    {% else %}
+                                    {{seventh_section.subsection_1.button_text}}
+                                    {% endif %}
+
+                                    </span></a>
                                 </div>
                                 <!-- end team details -->
                             </div>                            
@@ -389,11 +662,34 @@
                                 <!-- end team image -->
                                 <!-- team details -->
                                 <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text114">{{seventh_section.subsection_2.title}}</span>
-                                    <span class="text-small tz-text" id="tz-slider-text113">{{seventh_section.subsection_2.content}}</span>
+                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text114">
+                                    <!-- Subsection Title -->
+                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_title %}
+                                    {{seventh_section.subsection_2.chinese_title}}
+                                    {% else %}
+                                    {{seventh_section.subsection_2.title}}
+                                    {% endif %}
+
+                                    
+                                    </span>
+                                    <span class="text-small tz-text" id="tz-slider-text113">
+                                    <!-- Subsection Content -->
+                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_content %}
+                                    {{seventh_section.subsection_2.chinese_content}}
+                                    {% else %}
+                                    {{seventh_section.subsection_2.content}}
+                                    {% endif %}
+                                    </span>
                                     <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
                                     </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text116"><span class="tz-text" id="tz-btn-27">{{seventh_section.subsection_2.button_text}}</span></a>
+                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text116"><span class="tz-text" id="tz-btn-27">
+                                    <!-- Subtitle Chinese Button -->
+                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_button_text %}
+                                    {{seventh_section.subsection_2.chinese_button_text}}
+                                    {% else %}
+                                    {{seventh_section.subsection_2.button_text}}
+                                    {% endif %}
+                                    </span></a>
                                 </div>
                                 <!-- end team details -->
                             </div>                            
@@ -409,11 +705,32 @@
                                 <!-- end team image -->
                                 <!-- team details -->
                                 <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text117">{{seventh_section.subsection_3.title}}</span>
-                                    <span class="text-small tz-text" id="tz-slider-text118">{{seventh_section.subsection_3.content}}</span>
+                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text117">
+                                                                        <!-- Subsection Content -->
+                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_title %}
+                                    {{seventh_section.subsection_3.chinese_title}}
+                                    {% else %}
+                                    {{seventh_section.subsection_3.title}}
+                                    {% endif %}
+                                    </span>
+                                    <span class="text-small tz-text" id="tz-slider-text118">
+                                    <!-- Subsection Content -->
+                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_content %}
+                                    {{seventh_section.subsection_3.chinese_content}}
+                                    {% else %}
+                                    {{seventh_section.subsection_3.content}}
+                                    {% endif %}
+                                    </span>
                                     <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
                                     </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text120"><span class="tz-text" id="tz-btn-25">{{seventh_section.subsection_3.button_text}}</span></a>
+                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text120"><span class="tz-text" id="tz-btn-25">
+                                    <!-- Subtitle Chinese Button -->
+                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_button_text %}
+                                    {{seventh_section.subsection_3.chinese_button_text}}
+                                    {% else %}
+                                    {{seventh_section.subsection_3.button_text}}
+                                    {% endif %}
+                                    </span></a>
                                 </div>
                                 <!-- end team details -->
                             </div>                            
@@ -431,16 +748,43 @@
                     <div class="col-md-6 col-sm-12 col-xs-12 sm-text-center display-table sm-margin-ten-bottom xs-margin-fifteen-bottom">
                         <div class="offer-box-left display-table-cell-vertical-middle">
                             <div class="display-table-cell-vertical-middle sm-display-inline-block">
-                                <span class="title-small xs-title-extra-large text-white display-block tz-text">{{eighth_section.title}}</span>
-                                <span class="title-extra-large-2 alt-font xs-title-extra-large text-white display-block tz-text">{{eighth_section.subtitle}}</span>
+                                <span class="title-small xs-title-extra-large text-white display-block tz-text">
+                                {% if isChinese == "True" and eighth_section.chinese_title %}
+                                {{eighth_section.chinese_title}}
+                                {% else %}
+                                {{eighth_section.title}}
+                                {% endif %}
+                                
+                                </span>
+                                <span class="title-extra-large-2 alt-font xs-title-extra-large text-white display-block tz-text">
+                                {% if isChinese == "True" and eighth_section.chinese_subtitle %}
+                                {{eighth_section.chinese_subtitle}}
+                                {% else %}
+                                {{eighth_section.subtitle}}
+                                {% endif %}
+                                
+                                </span>
                             </div>
                         </div>
                     </div>
                     <!-- end section title -->
                     <div class="col-md-6 col-sm-12 col-xs-12 sm-text-center text-right display-table">
                         <div class="btn-dual display-table-cell-vertical-middle">
-                            <a class="btn btn-large propClone bg-white text-red btn-circle xs-margin-ten-bottom" href="#video-section5"><span class="tz-text">{{eighth_section.button_1.button_text}}</span></a>
-                            <a class="btn btn-large propClone highlight-button-white-border btn-circle xs-margin-ten-bottom" href="#team-section2"><span class="tz-text">{{eighth_section.button_2.button_text}}</span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
+                            <a class="btn btn-large propClone bg-white text-red btn-circle xs-margin-ten-bottom" href="#video-section5"><span class="tz-text">
+                            {% if isChinese == "True" and eighth_section.button_1.chinese_button_text %}
+                            {{eighth_section.button_1.chinese_button_text}}
+                            {% else %}
+                            {{eighth_section.button_1.button_text}}
+                            {% endif %}
+
+                            </span></a>
+                            <a class="btn btn-large propClone highlight-button-white-border btn-circle xs-margin-ten-bottom" href="#team-section2"><span class="tz-text">
+                            {% if isChinese == "True" and eighth_section.button_2.chinese_button_text %}
+                            {{eighth_section.button_2.chinese_button_text}}
+                            {% else %}
+                            {{eighth_section.button_2.button_text}}
+                            {% endif %}                                
+                            </span><i class="fa fa-angle-right icon-extra-small tz-icon-color"></i></a>
                         </div>
                     </div>
                 </div>
@@ -451,8 +795,22 @@
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">{{ninth_section.title}}</h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom">{{ninth_section.content}}</div>
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">
+                        {% if isChinese == "True" and ninth_section.chinese_title %}
+                        {{ninth_section.chinese_title}}
+                        {% else %}
+                        {{ninth_section.title}}
+                        {% endif %} 
+
+                        </h2>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom">
+                        {% if isChinese == "True" and ninth_section.chinese_content %}
+                        {{ninth_section.chinese_content}}
+                        {% else %}
+                        {{ninth_section.content}}
+                        {% endif %} 
+
+                        </div>
                     </div>
                     <!-- end section title -->
                 </div>                    
@@ -464,7 +822,15 @@
                             <div class="team-details text-center">
                                 <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
                                     <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_1.user.first_name}} {{ninth_section.faculty_1.user.last_name}}</span>
-                                    <span class="text-medium tz-text">{{ninth_section.faculty_1.job_title}}</span>
+                                    <span class="text-medium tz-text">
+                                    
+                                    {% if isChinese == "True" and ninth_section.faculty_1.chinese_job_title %}
+                                    {{ninth_section.faculty_1.chinese_job_title}}
+                                    {% else %}
+                                    {{ninth_section.faculty_1.job_title}}
+                                    {% endif %}
+                                    
+                                    </span>
                                 </div>
                                 <div class="medium-social-icon">
                                     <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
@@ -483,7 +849,15 @@
                             <div class="team-details text-center">
                                 <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
                                     <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_2.user.first_name}} {{ninth_section.faculty_2.user.last_name}}</span>
-                                    <span class="text-medium tz-text">{{ninth_section.faculty_2.job_title}}</span>
+                                    <span class="text-medium tz-text">
+                                    
+                                    {% if isChinese == "True" and ninth_section.faculty_2.chinese_job_title %}
+                                    {{ninth_section.faculty_2.chinese_job_title}}
+                                    {% else %}
+                                    {{ninth_section.faculty_2.job_title}}
+                                    {% endif %}
+                                    
+                                    </span>
                                 </div>
                                 <div class="medium-social-icon">
                                     <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
@@ -502,7 +876,15 @@
                             <div class="team-details text-center">
                                 <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
                                     <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_3.user.first_name}} {{ninth_section.faculty_3.user.last_name}}</span>
-                                    <span class="text-medium tz-text">{{ninth_section.faculty_3.job_title}}</span>
+                                                                        <span class="text-medium tz-text">
+                                    
+                                    {% if isChinese == "True" and ninth_section.faculty_3.chinese_job_title %}
+                                    {{ninth_section.faculty_3.chinese_job_title}}
+                                    {% else %}
+                                    {{ninth_section.faculty_3.job_title}}
+                                    {% endif %}
+                                    
+                                    </span>
                                 </div>
                                 <div class="medium-social-icon">
                                     <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
@@ -521,7 +903,15 @@
                             <div class="team-details text-center">
                                 <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
                                     <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_4.user.first_name}} {{ninth_section.faculty_4.user.last_name}}</span>
-                                    <span class="text-medium tz-text">{{ninth_section.faculty_4.job_title}}</span>
+                                    <span class="text-medium tz-text">
+                                    
+                                    {% if isChinese == "True" and ninth_section.faculty_4.chinese_job_title %}
+                                    {{ninth_section.faculty_4.chinese_job_title}}
+                                    {% else %}
+                                    {{ninth_section.faculty_4.job_title}}
+                                    {% endif %}
+                                    
+                                    </span>
                                 </div>
                                 <div class="medium-social-icon">
                                     <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
@@ -546,28 +936,55 @@
                                 <i class="fa {{tenth_section.widget_1.icon}} icon-large tz-icon-color text-white margin-ten-bottom xs-margin-seven-bottom"></i>
                                 <div class="counter-content">                                          
                                     <span class="timer counter-number title-extra-large sm-title-extra-large alt-font text-white display-block tz-text" data-to="{{tenth_section.widget_1.count}}" data-speed="7000"></span>
-                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">{{tenth_section.widget_1.text}}</span>
+                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">
+                                    
+                                    {% if isChinese == "True" and tenth_section.widget_1.chinese %}
+                                    {{tenth_section.widget_1.chinese_text}}
+                                    {% else %}
+                                    {{tenth_section.widget_1.text}}
+                                    {% endif %}
+                                    
+                                    
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 first xs-margin-seventeen-bottom">
                                 <i class="fa {{tenth_section.widget_2.icon}} icon-large tz-icon-color text-white margin-ten-bottom xs-margin-seven-bottom"></i>
                                 <div class="counter-content">                                        
                                     <span class="timer counter-number title-extra-large sm-title-extra-large alt-font text-white display-block tz-text" data-to="{{tenth_section.widget_2.count}}" data-speed="7000"></span>
-                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">{{tenth_section.widget_2.text}}</span>
+                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">
+                                    {% if isChinese == "True" and tenth_section.widget_2.chinese %}
+                                    {{tenth_section.widget_2.chinese_text}}
+                                    {% else %}
+                                    {{tenth_section.widget_2.text}}
+                                    {% endif %}
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 first xs-margin-seventeen-bottom">
                                 <i class="fa {{tenth_section.widget_3.icon}} icon-large tz-icon-color text-white margin-ten-bottom xs-margin-seven-bottom"></i>
                                 <div class="counter-content">                                        
                                     <span class="timer counter-number title-extra-large sm-title-extra-large alt-font text-white display-block tz-text" data-to="{{tenth_section.widget_3.count}}" data-speed="7000"></span>
-                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">{{tenth_section.widget_3.text}}</span>
+                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">
+                                    {% if isChinese == "True" and tenth_section.widget_3.chinese %}
+                                    {{tenth_section.widget_3.chinese_text}}
+                                    {% else %}
+                                    {{tenth_section.widget_3.text}}
+                                    {% endif %}
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 first">
                                 <i class="fa {{tenth_section.widget_4.icon}} icon-large tz-icon-color text-white margin-ten-bottom xs-margin-seven-bottom"></i>
                                 <div class="counter-content">                                       
                                     <span class="timer counter-number title-extra-large sm-title-extra-large alt-font text-white display-block tz-text" data-to="{{tenth_section.widget_4.count}}" data-speed="7000"></span>
-                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">{{tenth_section.widget_4.text}}</span>
+                                    <span class="text-small2 alt-font text-white sm-text-medium display-block tz-text">
+                                    {% if isChinese == "True" and tenth_section.widget_4.chinese %}
+                                    {{tenth_section.widget_4.chinese_text}}
+                                    {% else %}
+                                    {{tenth_section.widget_4.text}}
+                                    {% endif %}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -583,8 +1000,20 @@
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">{{eleventh_section.title}}</h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">{{eleventh_section.content}}</div>
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">
+                        {% if isChinese == "True" and eleventh_section.chinese_title %}
+                        {{eleventh_section.chinese_title}}
+                        {% else %}
+                        {{eleventh_section.title}}
+                        {% endif %}
+                        </h2>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">
+                        {% if isChinese == "True" and eleventh_section.chinese_content %}
+                        {{eleventh_section.chinese_content}}
+                        {% else %}
+                        {{eleventh_section.content}}
+                        {% endif %}
+                        </div>
                     </div>
                     <!-- end section title -->
                 </div>                    
@@ -626,8 +1055,20 @@
             <div class="container position-relative">
                 <div class="row">
                     <div class="col-md-12 text-left">
-                        <h3 class="text-dark-gray title-extra-large alt-font xs-title-extra-large-3 xs-margin-eleven-bottom tz-text">{{twelfth_section.title}}</h3>
-                        <div class="text-dark-gray width-55 sm-width-80 text-large margin-six-bottom xs-margin-nineteen-bottom xs-text-extra-large tz-text xs-width-100">{{twelfth_section.subtitle}}</div>
+                        <h3 class="text-dark-gray title-extra-large alt-font xs-title-extra-large-3 xs-margin-eleven-bottom tz-text">
+                        {% if isChinese == "True" and twelfth_section.chinese_title %}
+                        {{twelfth_section.chinese_title}}
+                        {% else %}
+                        {{twelfth_section.title}}
+                        {% endif %}
+                        </h3>
+                        <div class="text-dark-gray width-55 sm-width-80 text-large margin-six-bottom xs-margin-nineteen-bottom xs-text-extra-large tz-text xs-width-100">
+                        {% if isChinese == "True" and twelfth_section.chinese_subtitle %}
+                        {{twelfth_section.chinese_subtitle}}
+                        {% else %}
+                        {{twelfth_section.subtitle}}
+                        {% endif %}
+                        </div>
                         <div class="display-inline-block subscribe-style1 xs-width-100">
                             <form action="javascript:void(0)" method="post" class="position-relative">
                                 <input type="text" class="big-input text-transform-none xs-width-100 xs-no-margin" data-email="required" placeholder="Your email address" id="email" name="email">
@@ -675,7 +1116,13 @@
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font tz-text margin-ten-bottom xs-margin-fifteen-bottom">{{thirteenth_section.title}}</h2>
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font tz-text margin-ten-bottom xs-margin-fifteen-bottom">
+                        {% if isChinese == "True" and thirteenth_section.chinese_title %}
+                        {{thirteenth_section.chinese_title}}
+                        {% else %}
+                        {{thirteenth_section.title}}
+                        {% endif %}
+                        </h2>
                     </div>
                     <!-- end section title -->
                 </div>
@@ -684,20 +1131,56 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 no-padding text-center center-col clear-both">
                         <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-thirteen-bottom">
                             <div class="col-md-2 vertical-align-middle no-padding display-block md-margin-nine-bottom xs-margin-three-bottom"><i class="fa {{thirteenth_section.widget_1.icon}} icon-extra-large text-red xs-icon-medium-large tz-icon-color"></i></div>
-                            <div class="col-md-10 vertical-align-middle text-left no-padding text-dark-gray md-display-block sm-text-center text-medium tz-text">{{thirteenth_section.widget_1.text}} <br>{{thirteenth_section.widget_1.text_2}}</div>
+                            <div class="col-md-10 vertical-align-middle text-left no-padding text-dark-gray md-display-block sm-text-center text-medium tz-text">
+                            {% if isChinese == "True" and thirteenth_section.widget_1.chinese_text %}
+                            {{thirteenth_section.widget_1.chinese_text}}
+                            {% else %}
+                            {{thirteenth_section.widget_1.text}}
+                            {% endif %}
+                            <br>
+                            {% if isChinese == "True" and thirteenth_section.widget_1.chinese_text_2 %}
+                            {{thirteenth_section.widget_1.chinese_text_2}}
+                            {% else %}
+                            {{thirteenth_section.widget_1.text_2}}
+                            {% endif %}
+                            </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-thirteen-bottom">
                             <div class="col-md-3 vertical-align-middle no-padding display-block md-margin-nine-bottom xs-margin-three-bottom"><i class="fa {{thirteenth_section.widget_2.icon}} icon-extra-large text-red xs-icon-medium-large tz-icon-color"></i></div>
                             <div class="col-md-9 vertical-align-middle text-left no-padding md-display-block sm-text-center">
-                                <div class="text-medium font-weight-600 text-dark-gray display-block tz-text">{{thirteenth_section.widget_2.text}}</div>
-                                <a class="tz-text text-dark-gray text-medium" href="mailto:no-reply@domain.com">{{thirteenth_section.widget_3.text_2}}</a>
+                                <div class="text-medium font-weight-600 text-dark-gray display-block tz-text">
+                                {% if isChinese == "True" and thirteenth_section.widget_2.chinese_text %}
+                                {{thirteenth_section.widget_2.chinese_text}}
+                                {% else %}
+                                {{thirteenth_section.widget_2.text}}
+                                {% endif %}
+                                </div>
+                                <a class="tz-text text-dark-gray text-medium" href="mailto:no-reply@domain.com">
+                                {% if isChinese == "True" and thirteenth_section.widget_2.chinese_text_2 %}
+                                {{thirteenth_section.widget_2.chinese_text_2}}
+                                {% else %}
+                                {{thirteenth_section.widget_2.text_2}}
+                                {% endif %}
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="col-md-2 vertical-align-middle no-padding display-block md-margin-nine-bottom xs-margin-three-bottom"><i class="fa {{thirteenth_section.widget_3.icon}} icon-extra-large text-red xs-icon-medium-large tz-icon-color"></i></div>
                             <div class="col-md-10 vertical-align-middle text-left no-padding md-display-block sm-text-center">
-                                <div class="text-medium font-weight-600 text-dark-gray display-block tz-text">{{thirteenth_section.widget_3.text}}</div>
-                                <div class="text-medium text-dark-gray tz-text">{{thirteenth_section.widget_3.text_2}}</div>
+                                <div class="text-medium font-weight-600 text-dark-gray display-block tz-text">
+                                {% if isChinese == "True" and thirteenth_section.widget_3.chinese_text %}
+                                {{thirteenth_section.widget_3.chinese_text}}
+                                {% else %}
+                                {{thirteenth_section.widget_3.text}}
+                                {% endif %}
+                                </div>
+                                <div class="text-medium text-dark-gray tz-text">
+                                {% if isChinese == "True" and thirteenth_section.widget_2.chinese_text_2 %}
+                                {{thirteenth_section.widget_2.chinese_text_2}}
+                                {% else %}
+                                {{thirteenth_section.widget_2.text_2}}
+                                {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
