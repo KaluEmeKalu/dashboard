@@ -790,142 +790,74 @@
                 </div>
             </div>
         </section>
-        <section class="bg-white builder-bg padding-110px-tb xs-padding-60px-tb team-style2" id="team-section2">
+
+
+        <!-- Start Ninth Section -->
+
+        <section class="bg-white builder-bg padding-110px-tb xs-padding-60px-tb team-style3 border-none" id="blog-section1">
             <div class="container">                    
                 <div class="row">
                     <!-- section title -->
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">
                         {% if isChinese == "True" and ninth_section.chinese_title %}
                         {{ninth_section.chinese_title}}
                         {% else %}
                         {{ninth_section.title}}
-                        {% endif %} 
-
+                        {% endif %}
                         </h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom">
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">
                         {% if isChinese == "True" and ninth_section.chinese_content %}
                         {{ninth_section.chinese_content}}
                         {% else %}
                         {{ninth_section.content}}
                         {% endif %} 
-
                         </div>
                     </div>
                     <!-- end section title -->
                 </div>                    
-                <div class="row four-column">
-                    <!-- team member -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-fifteen-bottom xs-margin-twenty-nine-bottom">
-                        <div class="team position-relative">
-                            <div class="padding-twelve-bottom"><img alt="" src="{{ninth_section.faculty_1.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" class="img-round"></div>
-                            <div class="team-details text-center">
-                                <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
-                                    <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_1.user.first_name}} {{ninth_section.faculty_1.user.last_name}}</span>
-                                    <span class="text-medium tz-text">
-                                    
-                                    {% if isChinese == "True" and ninth_section.faculty_1.chinese_job_title %}
-                                    {{ninth_section.faculty_1.chinese_job_title}}
-                                    {% else %}
-                                    {{ninth_section.faculty_1.job_title}}
-                                    {% endif %}
-                                    
-                                    </span>
+                <div class="row">
+                    <div class="testimonial-style3 owl-carousel owl-theme black-pagination owl-dark-pagination owl-pagination-bottom">
+
+
+                        {% for faculty_member in ninth_section.faculty.all %}
+                        <!-- team member -->
+                        <div class="item">
+                            <div class="team col-md-12 col-sm-12 col-xs-12 clear-both">
+                                <!-- team image -->
+                                <div class="team-img position-relative overflow-hidden">
+                                    <img class="xs-width-100" src="{{faculty_member.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" id="tz-bg-41" alt=""/>
                                 </div>
-                                <div class="medium-social-icon">
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-twitter tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-linkedin tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-google-plus tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
+                                <!-- end team image -->
+                                <!-- team details -->
+                                <div class="team-details bg-light-gray tz-background-color text-center">
+                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text112">{{faculty_member.user.first_name}} {{faculty_member.user.first_name}}</span>
+                                    <span class="text-small tz-text" id="tz-slider-text119">
+                                        {% if isChinese == "True" and faculty_member.chinese_job_title %}
+                                            {{faculty_member.chinese_job_title}}
+                                        {% else %}
+                                            {{faculty_member.job_title}}
+                                        {% endif %}
+                                     </span>
+                                    <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
+                                    </div>
+                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">Read More</span></a>
                                 </div>
-                            </div>
+                                <!-- end team details -->
+                            </div>                            
                         </div>
+                        <!-- end team member -->
+                        {% endfor %}
+
                     </div>
-                    <!-- end team member -->
-                    <!-- team member -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-fifteen-bottom xs-margin-twenty-nine-bottom">
-                        <div class="team position-relative">
-                            <div class="padding-twelve-bottom"><img alt="" src="{{ninth_section.faculty_2.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" class="img-round"></div>
-                            <div class="team-details text-center">
-                                <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
-                                    <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_2.user.first_name}} {{ninth_section.faculty_2.user.last_name}}</span>
-                                    <span class="text-medium tz-text">
-                                    
-                                    {% if isChinese == "True" and ninth_section.faculty_2.chinese_job_title %}
-                                    {{ninth_section.faculty_2.chinese_job_title}}
-                                    {% else %}
-                                    {{ninth_section.faculty_2.job_title}}
-                                    {% endif %}
-                                    
-                                    </span>
-                                </div>
-                                <div class="medium-social-icon">
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-twitter tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-linkedin tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-google-plus tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end team member -->
-                    <!-- team member -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-fifteen-bottom xs-margin-twenty-nine-bottom">
-                        <div class="team position-relative">
-                            <div class="padding-twelve-bottom"><img alt="" src="{{ninth_section.faculty_3.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" class="img-round"></div>
-                            <div class="team-details text-center">
-                                <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
-                                    <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_3.user.first_name}} {{ninth_section.faculty_3.user.last_name}}</span>
-                                                                        <span class="text-medium tz-text">
-                                    
-                                    {% if isChinese == "True" and ninth_section.faculty_3.chinese_job_title %}
-                                    {{ninth_section.faculty_3.chinese_job_title}}
-                                    {% else %}
-                                    {{ninth_section.faculty_3.job_title}}
-                                    {% endif %}
-                                    
-                                    </span>
-                                </div>
-                                <div class="medium-social-icon">
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-twitter tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-linkedin tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-google-plus tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end team member -->
-                    <!-- team member -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-                        <div class="team position-relative">
-                            <div class="padding-twelve-bottom"><img alt="" src="{{ninth_section.faculty_4.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" class="img-round"></div>
-                            <div class="team-details text-center">
-                                <div class="team-name padding-twelve-bottom margin-sixteen-bottom border-bottom tz-border">
-                                    <span class="text-large font-weight-600 text-dark-gray display-block tz-text">{{ninth_section.faculty_4.user.first_name}} {{ninth_section.faculty_4.user.last_name}}</span>
-                                    <span class="text-medium tz-text">
-                                    
-                                    {% if isChinese == "True" and ninth_section.faculty_4.chinese_job_title %}
-                                    {{ninth_section.faculty_4.chinese_job_title}}
-                                    {% else %}
-                                    {{ninth_section.faculty_4.job_title}}
-                                    {% endif %}
-                                    
-                                    </span>
-                                </div>
-                                <div class="medium-social-icon">
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-facebook tz-icon-color builder-bg text-large text-black border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-twitter tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-linkedin tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                    <div class="display-inline-block margin-nine no-margin-tb"><a href="#"><i class="fa fa-google-plus tz-icon-color builder-bg text-black text-large border-radius-4"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end team member -->
                 </div>
             </div>
         </section>
+        <!-- End Ninth Section -->
+
+
+
+        <!-- Tenth Section -->
         <section  id="counter-section7" class="padding-110px-tb cover-background tz-builder-bg-image xs-padding-60px-tb border-none bg-img-five" data-img-size="(W)1920px X (H)525px" style="background:linear-gradient(rgba(188,48,49,0.5), rgba(188,48,49,0.5)), url('{{tenth_section.image.image.url}}')">
             <div class="container">
                 <div class="row">

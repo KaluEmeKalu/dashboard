@@ -238,16 +238,17 @@ class EighthSection(TimeStampBaseModel):
 
 class NinthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    faculty = ManyToManyField('UserProfile', related_name='ninth_sections')
     content = TextField(null=True, blank=True)
-    faculty_1 = ForeignKey('UserProfile', null=True, blank=True,
-                           related_name='eight_section_ones')
-    faculty_2 = ForeignKey('UserProfile', null=True, blank=True,
-                           related_name='eight_section_twos')
+    # faculty_1 = ForeignKey('UserProfile', null=True, blank=True,
+    #                        related_name='eight_section_ones')
+    # faculty_2 = ForeignKey('UserProfile', null=True, blank=True,
+    #                        related_name='eight_section_twos')
 
-    faculty_3 = ForeignKey('UserProfile', null=True, blank=True,
-                           related_name='eight_section_threes')
-    faculty_4 = ForeignKey('UserProfile', null=True, blank=True,
-                           related_name='eight_section_fours')
+    # faculty_3 = ForeignKey('UserProfile', null=True, blank=True,
+    #                        related_name='eight_section_threes')
+    # faculty_4 = ForeignKey('UserProfile', null=True, blank=True,
+    #                        related_name='eight_section_fours')
 
 
 class TenthSection(TimeStampBaseModel):

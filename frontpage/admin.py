@@ -93,8 +93,7 @@ class EighthSectionAdmin(admin.ModelAdmin):
 
 
 class NinthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'faculty_1', 'faculty_2',
-                    'faculty_3', 'faculty_4']
+    list_display = ['title', 'content']
 
 
 class ButtonAdmin(admin.ModelAdmin):
