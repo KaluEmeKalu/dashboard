@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.contrib.auth.models import User
 from . models_utils import (
     IntegerRangeField,
@@ -24,6 +25,7 @@ from django.db.models import (
     FileField,
     Model
 )
+
 
 
 class Blog(TimeStampBaseModel):

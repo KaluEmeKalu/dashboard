@@ -1,6 +1,6 @@
 beautifulsoup4
 django-imagekit
-django-widige-tweaks
+django-widget-tweaks
 Pillow
 beautifulsoup4
 django-ipware

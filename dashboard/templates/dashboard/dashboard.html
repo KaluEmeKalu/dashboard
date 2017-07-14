@@ -122,11 +122,85 @@
                               <!-- End Videoes And Video Modal -->
 
                               <!-- Exam -->
+                              <!-- This is EXTREMELY MESSY CODE! CLEAN IT UP! -->
                               {% if step.exam %}
                                 <a href="{{ step.exam.get_absolute_url }}">{{step.exam.name}}</a>
-                                ll
+
+
+
+                                <!-- Exam -->
+                                {% for exam_paper in exam_paper_list %}
+                                  {% if exam_paper.id == step.id %}
+
+                                    {% if exam_paper.exam_paper.exam.get_questions %}
+
+
+                                    <h2>
+                                     {{exam.name}}
+                                     {% if exam_paper.exam_paper.is_turned_in %}
+                                     Score: {{ exam_paper.exam_paper.get_score  }}
+                                     {% else %}
+                                     <br>
+                                     <a href="{% url 'dashboard:exam' turn_in='true' exam_id=exam_paper.exam_paper.exam.id  %}">
+                                       <button class="btn btn-danger btn-fill btn-just-icon">Turn In Exam</button>
+                                     </a>
+                                     {% endif %}
+                                    </h2>
+
+                                     <!-- a hidden input to tell saveAnswer function in main.js
+                                          what the url to send answers to -->
+                                     <span id="save_answer_span" >
+                                       <input type="hidden" value="save_answer/" id="save_answer_url" name="answer_url">
+                                       {% csrf_token %}
+                                       {% for question in exam_paper.exam_paper.exam.get_questions %}
+                                        <div id="question{{question.id}}" class="panel panel-default">
+                                            <div class="panel-heading">
+                                            {{forloop.counter}}) {{question.question}}
+
+                                            <!-- Selected Answer is showed here -->
+                                            <!-- I added comment tags to get rid of white spaces between django tags. stupid, but eh. -->
+                                            <span id="saved_answer{{question.id}}" class="label label-success"><!-- 
+                                             -->{% for answer in question.get_answers %}<!-- 
+                                               -->{% for selection in  exam_paper.exam_paper.selections.all %}<!-- 
+                                               -->{% if answer == selection.answer %}<!-- 
+                                               -->{{ answer.answer }}<!-- 
+                                               -->{% endif %}<!-- 
+                                               -->{% endfor %}<!-- 
+                                             -->{% endfor %}<!-- 
+                                             --></span>
+
+                                            <!-- Questio Image if it exists -->
+                                            {% if question.image %}
+                                            <br><a href="{{ question.image.image.url }}"><img class="question_image" src="{{ question.image.image.url }}"></a>
+                                            {% endif %}
+
+
+                                            </div>
+                                            <!-- On click the answer will be saved using saveAnswer function
+                                                 of main.js. -->
+                                            <div class="answer_body panel-body">
+
+                                                {% for answer in question.get_answers %}
+                                                   <span class="cursor an_answer my_pointer" onclick="saveAnswer({{answer.id}}, {{exam_paper.exam_paper.id}}, {{question.id}})" id="answer{{answer.id}}">
+                                                   {{forloop.counter | to_char}}) - {{answer.answer}}
+                                                   </span></br></br>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                      </span>
+                                      {% endfor %}
+                                    {% endif %}
+                                    <!-- End if exam_paper.exam_paper.exam.get_questions -->
+
+                                  {% endif %}
+                                {% endfor %}
+
+
+
                               {% endif %}
-                              <!-- EndExam -->
+                              <!-- End if step.exam -->
+
+
 
                           </div>
                           {% endfor %}

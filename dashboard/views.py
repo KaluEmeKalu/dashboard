@@ -449,7 +449,7 @@ def exam(request, exam_id, turn_in=False):
     try:
         exam_paper = ExamPaper.objects.get(exam_taker=exam_taker, exam=exam)
     except ExamPaper.DoesNotExist:
-        exam_paper = ExamPaper(exam_taker=exam_taker, exam=exam)
+        exam_paper = ExamPaper.objects.create(exam_taker=exam_taker, exam=exam)
         exam_paper.save()
 
     # random order
@@ -657,6 +657,7 @@ def dashboard(request, school_class_id=None):
 
 
 
+
     # this if/else statement handles
     # mapping to urls with a class id and those without.
     if school_class_id:
@@ -697,6 +698,21 @@ def dashboard(request, school_class_id=None):
                                 in completed_videos]
         context['school_class_user_table'] = school_class_user_table
         context['completed_videos_ids'] = completed_videos_ids
+
+    # Get all Exam Papers
+    exam_paper_list = []
+    for step in school_class.steps.all():
+        if step.exam:
+            try:
+                exam_paper = ExamPaper.objects.get(exam_taker=request.user,
+                                                   exam=step.exam)
+            except ExamPaper.DoesNotExist:
+                exam_paper = ExamPaper.objects.create(exam_taker=request.user, exam=step.exam)
+                exam_paper.save()
+            exam_paper_list.append({'id': step.id,
+                                    'exam_paper': exam_paper})
+    context['exam_paper_list'] = exam_paper_list
+    print(exam_paper_list * 1000)
 
     return render(request, 'dashboard/dashboard.html', context)
 

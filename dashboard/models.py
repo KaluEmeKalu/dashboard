@@ -114,6 +114,14 @@ def menu_upload_location(instance, filename):
 ##############################
 # Helper functions           #
 ##############################
+
+def queryset_to_list(queryset):
+    """
+    Converts Queryset to List
+    """
+    return [q for q in queryset]
+
+
 def get_definition(xml_string):
     # find the word definition start and end indexes
     index = xml_string.find("def")
@@ -347,8 +355,7 @@ class ExamPaperHelper(Model):
             # total answers equals all exam questions
             total_questions = len(self.exam.questions.all())
         else:
-            # total questions equals right answers + wrong answers
-            total_questions = correct_answers + len(self.get_wrong_answers())
+            total_questions = self.exam.questions.all()
 
         score = float(correct_answers) / float(total_questions) * 100.0
 
@@ -407,6 +414,30 @@ class SchoolClass(Model):
     private = BooleanField(default=False, blank=True)
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     description = TextField(null=True, blank=False)
+
+    def get_user_exam_papers(self, user):
+        exams = self.get_all_exams()
+
+        user_exam_papers = ExamPaper.objects.filter(exam_taker=user)
+        user_exam_papers = queryset_to_list(user_exam_papers)
+        user_exams = [user_exam_paper.exam for
+                      user_exam_paper in user_exam_papers]
+
+        # If User ExamPaper Doesn't Exist Make One
+        for exam in exams:
+            if exam not in user_exams:
+                exam_paper = ExamPaper.objects.create(exam_taker=user,
+                                                      exam=exam)
+                exam_paper.save()
+                user_exam_papers.append(user_exam_papers)
+
+        return user_exam_papers
+
+
+
+    def get_all_exams(self):
+        return [step.exam for step in self.steps.all() if step.exam]
+
 
     def get_all_videos(self):
         steps = self.steps.all()
@@ -1112,14 +1143,24 @@ class SchoolClassUserTable(Model):
         return CompletedExam.objects.filter(step__school_class=self.school_class,
                                             user=self.user)
 
-    
+    def get_exam_done_count(self):
+        user_exam_papers = self.school_class.get_user_exam_papers(self.user)
+        points = [(user_exam_paper.get_score() * .01) for user_exam_paper
+                  in user_exam_papers]
+        points = sum(points)
+        return points
+
 
 
 
     def get_percentage_complete(self):
         videos_done = len(self.get_completed_videos())
-        exams_done = len(self.get_completed_articles())
-        articles_done = len(self.get_completed_exams())
+        articles_done = len(self.get_completed_articles())
+        exams_done = self.get_exam_done_count()
+
+
+
+
 
         total_done = videos_done + exams_done + articles_done
 
@@ -1132,6 +1173,11 @@ class SchoolClassUserTable(Model):
                   school_class.get_step_substeps() returned 
                   zero total class substeps. """, e)
             return 0
+
+
+        print("Here it is >>> \n" * 20)
+        print("{} / {} \n".format(float(total_done), float(total_substeps)))
+        print (type(percent_done), percent_done, "-> exams done", exams_done)
 
         return round(percent_done * 100)
 
