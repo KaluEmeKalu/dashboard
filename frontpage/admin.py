@@ -58,7 +58,7 @@ class FourthSectionAdmin(admin.ModelAdmin):
 
 
 class FifthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'subsection_1', 'subsection_2',
+    list_display = ['title', 'chinese_title', 'subsection_1', 'subsection_2',
                     'subsection_3', 'subsection_4']
 
 
@@ -75,7 +75,7 @@ class SixthSectionAdmin(admin.ModelAdmin):
 
 
 class SeventhSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'subsection_1',
+    list_display = ['title', 'chinese_title', 'content', 'chinese_content', 'subsection_1',
                     'subsection_2', 'subsection_3']
 
 
@@ -89,19 +89,19 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class EighthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'subtitle', 'button_1', 'button_2']
+    list_display = ['title', 'chinese_title', 'subtitle', 'chinese_subtitle', 'button_1', 'button_2']
 
 
 class NinthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content']
+    list_display = ['title', 'chinese_title', 'content']
 
 
 class ButtonAdmin(admin.ModelAdmin):
-    list_display = ['button_text', 'button_text_url']
+    list_display = ['button_text', 'chinese_button_text', 'button_text_url']
 
 
 class WidgetAdmin(admin.ModelAdmin):
-    list_display = ['text', 'icon', 'count']
+    list_display = ['text', 'chinese_text', 'text_2', 'chinese_text_2', 'icon', 'count']
 
 
 class TenthSectionAdmin(admin.ModelAdmin):
@@ -109,11 +109,11 @@ class TenthSectionAdmin(admin.ModelAdmin):
                     'widget_3', 'widget_4']
 
 class EleventhSectionAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title', 'chinese_title',]
 
 
 class ThirteenthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'widget_1', 'widget_2',
+    list_display = ['title', 'chinese_title', 'widget_1', 'widget_2',
                     'widget_3']
 
 
@@ -126,11 +126,11 @@ class FooterAdmin(admin.ModelAdmin):
 
 
 class TwelfthSectionAdmin(admin.ModelAdmin):
-    list_display = ['title', 'subtitle', 'image']
+    list_display = ['title', 'chinese_title', 'subtitle', 'chinese_subtitle', 'image']
 
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'featured_image']
+    list_display = ['title', 'chinese_title', 'content', 'chinese_content', 'featured_image']
 
 
 

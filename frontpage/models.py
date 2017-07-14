@@ -30,13 +30,16 @@ from django.db.models import (
 
 class Blog(TimeStampBaseModel):
     title = CharField(max_length=380, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
+    chinese_content = TextField(null=True, blank=True)
     featured_image = ForeignKey(
         'Image', related_name="blogs_fm", null=True, blank=True)
     images = ManyToManyField('Image', blank=True, related_name="blogs_m" )
 
 class Button(TimeStampBaseModel):
     button_text = CharField(max_length=180, null=True, blank=True)
+    chinese_button_text = CharField(max_length=180, null=True, blank=True)
     button_text_url = CharField(max_length=180, null=True, blank=True)
 
 
@@ -193,6 +196,7 @@ class FourthSection(TimeStampBaseModel):
 
 class FifthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     subsection_1 = ForeignKey('ImageSubsection',
                               related_name='fourth_sections_ones',
                               blank=True)
@@ -215,7 +219,9 @@ class SixthSection(TimeStampBaseModel):
 
 class SeventhSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
+    chinese_content = TextField(null=True, blank=True)
     subsection_1 = ForeignKey('ImageSubsection',
                               related_name='seventh_sections_ones',
                               blank=True)
@@ -229,7 +235,9 @@ class SeventhSection(TimeStampBaseModel):
 
 class EighthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     subtitle = CharField(max_length=180, null=True, blank=True)
+    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
     button_1 = ForeignKey('Button', null=True, blank=True,
                           related_name='eight_section_ones')
     button_2 = ForeignKey('Button', null=True, blank=True,
@@ -238,6 +246,7 @@ class EighthSection(TimeStampBaseModel):
 
 class NinthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     faculty = ManyToManyField('UserProfile', related_name='ninth_sections')
     content = TextField(null=True, blank=True)
     # faculty_1 = ForeignKey('UserProfile', null=True, blank=True,
@@ -266,19 +275,24 @@ class TenthSection(TimeStampBaseModel):
 
 class EleventhSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
+    chinese_content = TextField(null=True, blank=True)
     articles = ManyToManyField(Article, blank=True, related_name="eleven_sections")
 
 
 class TwelfthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     subtitle = CharField(max_length=180, null=True, blank=True)
+    chinese_subtitle = CharField(max_length=180, null=True, blank=True)
     image = ForeignKey(
         'Image', related_name="twelfth_sections", null=True, blank=True)
 
 
 class ThirteenthSection(TimeStampBaseModel):
     title = CharField(max_length=180, null=True, blank=True)
+    chinese_title = CharField(max_length=180, null=True, blank=True)
     widget_1 = ForeignKey('Widget', null=True, blank=True,
                           related_name='thirteenth_section_ones')
     widget_2 = ForeignKey('Widget', null=True, blank=True,
