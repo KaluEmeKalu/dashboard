@@ -1021,6 +1021,7 @@ class CompletedSubStep(NameTimeStampBaseModel):
 class Article(Model):
     texts = ManyToManyField('Text', related_name="articles", blank=True)
     title = CharField(max_length=180, blank=True, null=True)
+    chinese_title = CharField(max_length=180, blank=True, null=True)
 
     timestamp = DateTimeField(
         editable=False, auto_now_add=True, auto_now=False)
@@ -1067,6 +1068,8 @@ class Article(Model):
 
 class Text(Model):
     title = CharField(max_length=180, blank=True, null=True)
+    chinese_title = CharField(max_length=180, blank=True, null=True)
+    chinese_content = TextField(blank=True, null=True)
     content = TextField(blank=True, null=True)
     timestamp = DateTimeField(
         editable=False, auto_now_add=True, auto_now=False)
