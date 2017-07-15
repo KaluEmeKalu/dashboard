@@ -14,6 +14,7 @@ from . models import (
     TwelfthSection,
     ThirteenthSection,
     Footer,
+    UniversitySection
 )
 from dashboard.models import Article, Text
 from django.shortcuts import get_object_or_404
@@ -42,6 +43,10 @@ def index(request, isChinese=None):
     try:
         context['first_sections'] = first_sections
         context['first_section'] = first_section
+
+
+        # Get University Section
+        context['university_section'] = UniversitySection.objects.first()
 
         # Get Second SubSection
         context['second_subsection'] = SecondSection.objects.first()

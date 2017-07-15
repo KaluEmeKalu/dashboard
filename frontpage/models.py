@@ -27,7 +27,6 @@ from django.db.models import (
 )
 
 
-
 class Blog(TimeStampBaseModel):
     title = CharField(max_length=380, null=True, blank=True)
     chinese_title = CharField(max_length=180, null=True, blank=True)
@@ -35,7 +34,8 @@ class Blog(TimeStampBaseModel):
     chinese_content = TextField(null=True, blank=True)
     featured_image = ForeignKey(
         'Image', related_name="blogs_fm", null=True, blank=True)
-    images = ManyToManyField('Image', blank=True, related_name="blogs_m" )
+    images = ManyToManyField('Image', blank=True, related_name="blogs_m")
+
 
 class Button(TimeStampBaseModel):
     button_text = CharField(max_length=180, null=True, blank=True)
@@ -143,6 +143,18 @@ class Widget(TimeStampBaseModel):
 # Numbered Sections
 
 ####################
+
+class UniversitySection(TimeStampBaseModel):
+    image_1 = ForeignKey('Image', related_name="university_section_ones",
+                         null=True, blank=True)
+    image_2 = ForeignKey('Image', related_name="university_section_twos",
+                         null=True, blank=True)
+    image_3 = ForeignKey('Image', related_name="university_section_threes",
+                         null=True, blank=True)
+    image_4 = ForeignKey('Image', related_name="university_section_fours",
+                         null=True, blank=True)
+
+
 class FirstSection(TimeStampBaseModel):
     image = ForeignKey('Image', related_name="slides", null=True, blank=True)
     section = ForeignKey('Subsection', related_name='slides',
@@ -279,7 +291,8 @@ class EleventhSection(TimeStampBaseModel):
     chinese_title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
     chinese_content = TextField(null=True, blank=True)
-    articles = ManyToManyField(Article, blank=True, related_name="eleven_sections")
+    articles = ManyToManyField(
+        Article, blank=True, related_name="eleven_sections")
 
 
 class TwelfthSection(TimeStampBaseModel):

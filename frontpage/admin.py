@@ -26,7 +26,12 @@ from . models import (
     Icon,
     Article,
     Text,
+    UniversitySection,
 )
+
+
+class UniversitySectionAdmin(admin.ModelAdmin):
+    list_display = ['image_1', 'image_2', 'image_3', 'image_4']
 
 
 class FirstSectionAdmin(admin.ModelAdmin):
@@ -133,9 +138,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ['title', 'chinese_title', 'content', 'chinese_content', 'featured_image']
 
 
-
-
-
+admin.site.register(UniversitySection, UniversitySectionAdmin)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Icon, IconAdmin)
 admin.site.register(Footer, FooterAdmin)
