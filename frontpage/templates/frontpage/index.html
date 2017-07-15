@@ -1,6 +1,6 @@
 {% extends 'frontpage/base.html' %}
 {% load static %}
-
+{% load extras %}
 
 {% block main_section %}
 
@@ -969,7 +969,7 @@
                                     <span class="text-small tz-text" id="tz-slider-text119"> {{blog.get_intro | truncatechars:90}}</span>
                                     <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
                                     </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">Read More</span></a>
+                                    <a href="{{blog.get_school_blog_url| what_language:isChinese}}" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">Read More</span></a>
                                 </div>
                                 <!-- end team details -->
                             </div>                            

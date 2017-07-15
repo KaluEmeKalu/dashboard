@@ -1,4 +1,5 @@
 {% load static %}
+{% load extras %}
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -50,7 +51,7 @@
                     <div class="row">
                         <!-- logo -->
                         <div class="col-md-3 col-sm-4 col-xs-9">
-                            <a href="#home" class="inner-link"><img alt="" src="{% static 'frontpage/images/jxfls_logo.png' %}" data-img-size="(W)163px X (H)39px"></a>
+                            <a href="/" class="inner-link"><img alt="" src="{% static 'frontpage/images/jxfls_logo.png' %}" data-img-size="(W)163px X (H)39px"></a>
                         </div>
                         <!-- end logo -->
                         <div class="col-md-9 col-sm-8 col-xs-3 position-inherit">
@@ -108,9 +109,9 @@
                                     
                                     <li class="nav-button propClone sm-no-margin-tb float-left btn-medium sm-no-margin-left"> 
                                     {% if isChinese == "True"%}
-                                    <a href="/eng" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">English</a> 
+                                    <a href="{{request.path}}eng" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">English</a> 
                                     {% else %}
-                                    <a href="/" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">中文</a> 
+                                    <a href="{{request.path | get_chinese_url }}" class="inner-link btn btn-small propClone bg-red text-white border-radius-0 font-weight-500 sm-padding-nav-btn sm-display-inline-block">中文</a> 
                                     {% endif %}
                                     </li>
                                 </ul>

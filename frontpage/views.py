@@ -15,9 +15,25 @@ from . models import (
     ThirteenthSection,
     Footer,
 )
+from dashboard.models import Article, Text
+from django.shortcuts import get_object_or_404
+
+def blog_list(request, isChinese=None):
+    blogs = Article.objects.all()
+
+    context = {'blogs': blogs, 'isChinese': isChinese}
+    return render(request, 'frontpage/blog_list.html', context)
+
+
+def blog_detail(request, pk, isChinese=None):
+    blog = get_object_or_404(Article, pk=int(pk))
+    context = {'blog': blog, 'isChinese': isChinese}
+
+    return render(request, 'frontpage/blog_detail.html', context)
 
 
 def index(request, isChinese=None):
+
     first_sections = FirstSection.objects.all()
     first_section = first_sections.first()
     context = {'isChinese': isChinese}
@@ -75,3 +91,8 @@ def index(request, isChinese=None):
 
 
     return render(request, "frontpage/index.html", context)
+
+
+def blog(request, isChinese=None):
+    context = {'isChinese': isChinese}
+    return render(request, 'frontpage/blog.html', context)

@@ -1027,11 +1027,16 @@ class Article(Model):
     updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     order = IntegerField(default=0)
     url = CharField(max_length=300, blank=True, null=True)
+    image_url = CharField(max_length=400, blank=True, null=True)
     image = models.ForeignKey('Image', null=True, blank=True,
                               related_name='articles')
     user = ForeignKey(User, null=True, blank=True,
                       related_name="articles")
 
+
+    def get_school_blog_url(self):
+
+        return "/blogs/{}".format(self.pk)
 
 
 
