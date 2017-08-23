@@ -133,6 +133,8 @@ class Widget(TimeStampBaseModel):
     count = IntegerField(default=0, null=True, blank=True)
     text_2 = CharField(max_length=180, null=True, blank=True)
     chinese_text_2 = CharField(max_length=180, null=True, blank=True)
+    link = CharField(max_length=100, null=True, blank=True)
+    second_phone_number = CharField(max_length=180, null=True, blank=True)
 
     def __str__(self):
         return self.text
@@ -313,3 +315,4 @@ class ThirteenthSection(TimeStampBaseModel):
                           related_name='thirteenth_section_twos')
     widget_3 = ForeignKey('Widget', null=True, blank=True,
                           related_name='thirteenth_section_threes')
+

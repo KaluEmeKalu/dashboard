@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . models import (
     FirstSection,
     SecondSection,
@@ -14,7 +14,8 @@ from . models import (
     TwelfthSection,
     ThirteenthSection,
     Footer,
-    UniversitySection
+    UniversitySection,
+    MailingListEntry
 )
 from dashboard.models import Article, Text
 from django.shortcuts import get_object_or_404
@@ -31,6 +32,17 @@ def blog_detail(request, pk, isChinese=None):
     context = {'blog': blog, 'isChinese': isChinese}
 
     return render(request, 'frontpage/blog_detail.html', context)
+
+
+def save_email(request, isChinese=None):
+    if request.method == "POST":
+        email = request.POST.get("email", '').strip()
+        print(email * 1000)
+
+        email = MailingListEntry.objects.create(email=email)
+        email.save()
+
+    return redirect('frontpage:index')
 
 
 def index(request, isChinese=None):

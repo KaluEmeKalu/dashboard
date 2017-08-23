@@ -27,7 +27,11 @@ from . models import (
     Article,
     Text,
     UniversitySection,
+    MailingListEntry
 )
+
+class MailingListEntryAdmin(admin.ModelAdmin):
+    list_display = ['email', 'name']
 
 
 class UniversitySectionAdmin(admin.ModelAdmin):
@@ -137,7 +141,7 @@ class TwelfthSectionAdmin(admin.ModelAdmin):
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['title', 'chinese_title', 'content', 'chinese_content', 'featured_image']
 
-
+admin.site.register(MailingListEntry, MailingListEntryAdmin)
 admin.site.register(UniversitySection, UniversitySectionAdmin)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Icon, IconAdmin)

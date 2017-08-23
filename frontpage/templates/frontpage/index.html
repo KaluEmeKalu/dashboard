@@ -581,165 +581,6 @@
             </div>
         </section>
 
-        <section class="bg-white builder-bg padding-110px-tb xs-padding-60px-tb team-style3 border-none" id="team-section3">
-            <div class="container">                    
-                <div class="row">
-                    <!-- section title -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-dark-gray font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text" id="tz-slider-text106">
-                        <!-- Seventh Section Title -->
-                        {% if isChinese == "True" and seventh_section.chinese_title %}
-                        {{seventh_section.chinese_title}}
-                        {% else %}
-                        {{seventh_section.title}}
-                        {% endif %}
-                        
-                        </h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom xs-margin-nineteen-bottom" id="tz-slider-text107">
-                        <!-- Seventh Section Content -->
-                        {% if isChinese == "True" and seventh_section.chinese_content %}
-                        {{seventh_section.chinese_content}}
-                        {% else %}
-                        {{seventh_section.content}}
-                        {% endif %}
-                        </div>
-                    </div>
-                    <!-- end section title -->
-                </div>                    
-                <div class="row">
-                    <div class="testimonial-style3 owl-carousel owl-theme black-pagination owl-dark-pagination owl-pagination-bottom">
-                        <!-- team member -->
-                        <div class="item">
-                            <div class="team col-md-12 col-sm-12 col-xs-12 clear-both">
-                                <!-- team image -->
-                                <div class="team-img position-relative overflow-hidden">
-                                    <img class="xs-width-100" src="{{seventh_section.subsection_1.image.image.url}}" data-img-size="(W)600px X (H)600px" id="tz-bg-41" alt=""/>
-                                </div>
-                                <!-- end team image -->
-                                <!-- team details -->
-                                <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text112">
-                                    <!-- Subsection Title -->
-                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_title %}
-                                    {{seventh_section.subsection_1.chinese_title}}
-                                    {% else %}
-                                    {{seventh_section.subsection_1.title}}
-                                    {% endif %}
-                                    
-                                    </span>
-                                    <span class="text-small tz-text" id="tz-slider-text119"> 
-                                    <!-- Subsection Content -->
-                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_content %}
-                                    {{seventh_section.subsection_1.chinese_content}}
-                                    {% else %}
-                                    {{seventh_section.subsection_1.content}}
-                                    {% endif %}
-                                    
-                                    </span>
-                                    <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
-                                    </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">
-                                    <!-- Subsection Button Text -->
-                                    {% if isChinese == "True" and seventh_section.subsection_1.chinese_button_text %}
-                                    {{seventh_section.subsection_1.chinese_button_text}}
-                                    {% else %}
-                                    {{seventh_section.subsection_1.button_text}}
-                                    {% endif %}
-
-                                    </span></a>
-                                </div>
-                                <!-- end team details -->
-                            </div>                            
-                        </div>
-                        <!-- end team member -->
-                        <!-- team member -->
-                        <div class="item">
-                            <div class="team col-md-12 col-sm-12 col-xs-12 clear-both">
-                                <!-- team image -->
-                                <div class="team-img position-relative overflow-hidden">
-                                    <img class="xs-width-100" src="{{seventh_section.subsection_2.image.image.url}}" data-img-size="(W)600px X (H)600px" id="tz-bg-42" alt=""/>
-                                </div>
-                                <!-- end team image -->
-                                <!-- team details -->
-                                <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text114">
-                                    <!-- Subsection Title -->
-                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_title %}
-                                    {{seventh_section.subsection_2.chinese_title}}
-                                    {% else %}
-                                    {{seventh_section.subsection_2.title}}
-                                    {% endif %}
-
-                                    
-                                    </span>
-                                    <span class="text-small tz-text" id="tz-slider-text113">
-                                    <!-- Subsection Content -->
-                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_content %}
-                                    {{seventh_section.subsection_2.chinese_content}}
-                                    {% else %}
-                                    {{seventh_section.subsection_2.content}}
-                                    {% endif %}
-                                    </span>
-                                    <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
-                                    </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text116"><span class="tz-text" id="tz-btn-27">
-                                    <!-- Subtitle Chinese Button -->
-                                    {% if isChinese == "True" and seventh_section.subsection_2.chinese_button_text %}
-                                    {{seventh_section.subsection_2.chinese_button_text}}
-                                    {% else %}
-                                    {{seventh_section.subsection_2.button_text}}
-                                    {% endif %}
-                                    </span></a>
-                                </div>
-                                <!-- end team details -->
-                            </div>                            
-                        </div>
-                        <!-- end team member -->
-                        <!-- team member -->
-                        <div class="item">
-                            <div class="team col-md-12 col-sm-12 col-xs-12 clear-both">
-                                <!-- team image -->
-                                <div class="team-img position-relative overflow-hidden">
-                                    <img class="xs-width-100" src="{{seventh_section.subsection_3.image.image.url}}" data-img-size="(W)600px X (H)600px" id="tz-bg-43" alt=""/>
-                                </div>
-                                <!-- end team image -->
-                                <!-- team details -->
-                                <div class="team-details bg-light-gray tz-background-color text-center">
-                                    <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text117">
-                                                                        <!-- Subsection Content -->
-                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_title %}
-                                    {{seventh_section.subsection_3.chinese_title}}
-                                    {% else %}
-                                    {{seventh_section.subsection_3.title}}
-                                    {% endif %}
-                                    </span>
-                                    <span class="text-small tz-text" id="tz-slider-text118">
-                                    <!-- Subsection Content -->
-                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_content %}
-                                    {{seventh_section.subsection_3.chinese_content}}
-                                    {% else %}
-                                    {{seventh_section.subsection_3.content}}
-                                    {% endif %}
-                                    </span>
-                                    <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
-                                    </div>
-                                    <a href="#" class="btn-small btn bg-red text-white" id="tz-slider-text120"><span class="tz-text" id="tz-btn-25">
-                                    <!-- Subtitle Chinese Button -->
-                                    {% if isChinese == "True" and seventh_section.subsection_3.chinese_button_text %}
-                                    {{seventh_section.subsection_3.chinese_button_text}}
-                                    {% else %}
-                                    {{seventh_section.subsection_3.button_text}}
-                                    {% endif %}
-                                    </span></a>
-                                </div>
-                                <!-- end team details -->
-                            </div>                            
-                        </div>
-                        <!-- end team member -->
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="padding-60px-tb bg-red builder-bg border-none" id="callto-action9">
             <div class="container">
@@ -1003,7 +844,8 @@
                         {% endif %}
                         </div>
                         <div class="display-inline-block subscribe-style1 xs-width-100">
-                            <form action="javascript:void(0)" method="post" class="position-relative">
+                            <form action="{% url 'frontpage:save_email' %}" method="post" class="position-relative">
+                                {% csrf_token %}
                                 <input type="text" class="big-input text-transform-none xs-width-100 xs-no-margin" data-email="required" placeholder="Your email address" id="email" name="email">
                                 <a class="default-submit title-small text-dark-gray" href="#"><i class="fa fa-long-arrow-right tz-icon-color"></i></a>
                             </form>
@@ -1093,13 +935,18 @@
                                 {{thirteenth_section.widget_2.text}}
                                 {% endif %}
                                 </div>
-                                <a class="tz-text text-dark-gray text-medium" href="mailto:no-reply@domain.com">
+                                <!-- <a class="tz-text text-dark-gray text-medium" href="mailto:no-reply@domain.com"> -->
                                 {% if isChinese == "True" and thirteenth_section.widget_2.chinese_text_2 %}
                                 {{thirteenth_section.widget_2.chinese_text_2}}
                                 {% else %}
                                 {{thirteenth_section.widget_2.text_2}}
                                 {% endif %}
-                                </a>
+                                <br>
+                                {% if thirteenth_section.widget_2.second_phone_number %}
+                                    {{ thirteenth_section.widget_2.second_phone_number }}
+                                {% endif %}
+
+                                <!-- </a> -->
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
