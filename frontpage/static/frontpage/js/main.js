@@ -39,6 +39,7 @@ $(document).ready(function () {
         navigation: true, // Show next and prev buttons
         slideSpeed: 300,
         items: 3,
+        autoPlay: true,
         paginationSpeed: 400,
         singleItem: true,
         navigationText: ['<i class="fa fa-long-arrow-left"></i>', '<i class="fa fa-long-arrow-right"></i>']
