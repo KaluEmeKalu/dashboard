@@ -38,7 +38,6 @@ $(document).ready(function () {
     $('.owl-slider-full').owlCarousel({
         navigation: true, // Show next and prev buttons
         slideSpeed: 300,
-        autoPlay: true,
         items: 3,
         paginationSpeed: 400,
         singleItem: true,
