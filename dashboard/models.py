@@ -22,10 +22,12 @@ from django.db.models import (
     TextField,
     OneToOneField,
     ManyToManyField,
-    FileField
+    FileField,
+    SlugField
 )
 from django.http import HttpResponse
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.template.defaultfilters import slugify
 
 # python imports
 import re
@@ -1034,10 +1036,16 @@ class Article(Model):
     user = ForeignKey(User, null=True, blank=True,
                       related_name="articles")
 
+    slug = SlugField(default='')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 
     def get_school_blog_url(self):
 
-        return "/blogs/{}".format(self.pk)
+        return "/blogs/{}".format(self.slug)
 
 
 

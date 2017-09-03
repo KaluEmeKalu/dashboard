@@ -93,8 +93,9 @@ class VideoAdmin(admin.ModelAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'profile_pic', 'is_faculty', 'is_student',
-                    'job_title', 'points']
+    list_display = ['user', 'profile_pic', 'is_faculty', 'is_student', 'faculty_profile',
+                    'job_title', 'points', 'chinese_job_title', 'job_title',
+                    'faculty_profile', 'chinese_faculty_profile']
 
 
 class EighthSectionAdmin(admin.ModelAdmin):

@@ -81,6 +81,7 @@ $(document).ready(function () {
     $('.testimonial-style3').owlCarousel({
         navigation: false,
         items: 3,
+        autoPlay: true,
         itemsDesktop: [1200, 3],
         itemsTablet: [800, 2],
         itemsMobile: [700, 1]

@@ -15,7 +15,8 @@ from . models import (
     ThirteenthSection,
     Footer,
     UniversitySection,
-    MailingListEntry
+    MailingListEntry,
+    UserProfile
 )
 from dashboard.models import Article, Text
 from django.shortcuts import get_object_or_404
@@ -27,8 +28,15 @@ def blog_list(request, isChinese=None):
     return render(request, 'frontpage/blog_list.html', context)
 
 
-def blog_detail(request, pk, isChinese=None):
-    blog = get_object_or_404(Article, pk=int(pk))
+def faculty_detail(request, slug, isChinese=None):
+    faculty = get_object_or_404(UserProfile, slug=slug)
+    context = {'faculty': faculty, 'isChinese': isChinese}
+
+    return render(request, 'frontpage/faculty_detail.html', context)
+
+
+def blog_detail(request, slug, isChinese=None):
+    blog = get_object_or_404(Article, slug=slug)
     context = {'blog': blog, 'isChinese': isChinese}
 
     return render(request, 'frontpage/blog_detail.html', context)

@@ -9,6 +9,7 @@ from . models_utils import (
     Image
 )
 
+from django.template.defaultfilters import slugify
 from dashboard.models import Article, Text
 
 from django.db.models import (
@@ -23,7 +24,8 @@ from django.db.models import (
     OneToOneField,
     ManyToManyField,
     FileField,
-    Model
+    Model,
+    SlugField
 )
 
 
@@ -32,9 +34,14 @@ class Blog(TimeStampBaseModel):
     chinese_title = CharField(max_length=180, null=True, blank=True)
     content = TextField(null=True, blank=True)
     chinese_content = TextField(null=True, blank=True)
+    slug = SlugField(default='')
     featured_image = ForeignKey(
         'Image', related_name="blogs_fm", null=True, blank=True)
     images = ManyToManyField('Image', blank=True, related_name="blogs_m")
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Button(TimeStampBaseModel):
@@ -116,10 +123,32 @@ class UserProfile(TimeStampBaseModel):
     points = IntegerField(default=0, blank=True, null=True)
     job_title = CharField(max_length=180, null=True, blank=True)
     chinese_job_title = CharField(max_length=180, null=True, blank=True)
+    faculty_profile = TextField(null=True, blank=True)
+    chinese_faculty_profile = TextField(null=True, blank=True)
     user = OneToOneField(User, related_name="profile")
+    slug = SlugField(default='')
 
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+      return "/faculty/" + self.slug
+
+    def save(self, *args, **kwargs):
+
+
+        # If first & last name use that for slug
+        # if not set a slug with user id
+        if self.user.first_name and self.user.last_name:
+            slug = slugify(self.user.first_name + " " + self.user.last_name)
+        else:
+            link = "No First and last name user id {}".format(self.user.id)
+            slug = slugify(link)
+        self.slug = slug
+
+        super().save(*args, **kwargs)
+
+
 
 
 class Video(NameTimeStampBaseModel):
