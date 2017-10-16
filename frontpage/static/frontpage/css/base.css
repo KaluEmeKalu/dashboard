@@ -1424,6 +1424,3 @@ figure:hover img { cursor: url("../images/icon/icon-zoom-white.png"), pointer; o
 }
 .GFInfo{list-style:none;width: 100%;height: auto;}
 /**/
-.owl-item{
-    width :300px !important;
-}
