@@ -1355,3 +1355,43 @@ figure:hover img { cursor: url("../images/icon/icon-zoom-white.png"), pointer; o
 .html-video { background-color: #000; height: auto; left: 50%; min-height: 100%; min-width: 100%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: auto; z-index: -3;}
 .sound iframe{width: 100%;}
 .video-background { position: relative; height: 100%; width: 100%; z-index: 1; top: 0; background: rgba(67,67,67,0.5); }
+
+
+
+/* ===================================
+    Custom Code -- Kalu --
+====================================== */
+
+
+
+.fifteen_div {
+    position: relative;
+}
+.fifteen_div img,.fifteen_div p {
+    position: relative;
+}
+.fifteen_div p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0;
+    top:0;
+}
+.par_div:nth-child(odd) img  {
+    opacity: 0
+}
+.par_div:nth-child(odd) .fifteen_div:hover img {
+    opacity: 1;
+}
+.par_div:nth-child(odd) .fifteen_div:hover p {
+    opacity: 0;
+}
+.par_div:nth-child(even) p  {
+    opacity: 0
+}
+.par_div:nth-child(even) .fifteen_div:hover img {
+    opacity: 0;
+}
+.par_div:nth-child(even) .fifteen_div:hover p {
+    opacity: 1;
+}

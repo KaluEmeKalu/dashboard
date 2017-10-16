@@ -444,8 +444,18 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 four-column">
                         <!-- feature box -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
-                            <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_1.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom par_div">
+                            <div class="margin-fifteen-bottom sm-margin-ten-bottom fifteen_div">
+                                <img src="{{fifth_section.subsection_1.image.image.url}}" data-img-size="(W)132px X (H)132px" alt="">
+                                <p>
+                                  <!-- Content -->
+                                  {% if isChinese == "True" and fifth_section.subsection_1.chinese_content %}
+                                  {{fifth_section.subsection_1.chinese_content|truncatechars:319}}
+                                  {% else %}
+                                  {{fifth_section.subsection_1.content|truncatechars:319}}
+                                  {% endif %}
+                                </p>
+                            </div>
                             <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
                             <!-- Title -->
                             {% if isChinese == "True" and fifth_section.subsection_1.chinese_title %}
@@ -455,18 +465,23 @@
                             {% endif %}
                             </h3>
                             <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
-                                <!-- Content -->
-                                {% if isChinese == "True" and fifth_section.subsection_1.chinese_content %}
-                                {{fifth_section.subsection_1.chinese_content}}
-                                {% else %}
-                                {{fifth_section.subsection_1.content}}
-                                {% endif %}
+
                             </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
-                            <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_2.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom par_div">
+                            <div class="margin-fifteen-bottom sm-margin-ten-bottom fifteen_div">
+                              <img src="{{fifth_section.subsection_2.image.image.url}}" data-img-size="(W)132px X (H)132px" alt="">
+                              <p>
+                                <!-- Content -->
+                                {% if isChinese == "True" and fifth_section.subsection_2.chinese_content %}
+                                {{fifth_section.subsection_2.chinese_content|truncatechars:319}}
+                                {% else %}
+                                {{fifth_section.subsection_2.content|truncatechars:319}}
+                                {% endif %}
+                              </p>
+                            </div>
                             <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
                             <!-- Title -->
                             {% if isChinese == "True" and fifth_section.subsection_2.chinese_title %}
@@ -476,18 +491,23 @@
                             {% endif %}
                             </h3>
                             <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
-                            <!-- Content -->
-                                {% if isChinese == "True" and fifth_section.subsection_2.chinese_content %}
-                                {{fifth_section.subsection_2.chinese_content}}
-                                {% else %}
-                                {{fifth_section.subsection_2.content}}
-                                {% endif %}
+
                             </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
-                            <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_3.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom par_div">
+                            <div class="margin-fifteen-bottom sm-margin-ten-bottom fifteen_div">
+                              <img src="{{fifth_section.subsection_3.image.image.url}}" data-img-size="(W)132px X (H)132px" alt="">
+                              <p>
+                              <!-- Content -->
+                              {% if isChinese == "True" and fifth_section.subsection_3.chinese_content %}
+                              {{fifth_section.subsection_3.chinese_content|truncatechars:319}}
+                              {% else %}
+                              {{fifth_section.subsection_3.content|truncatechars:319}}
+                              {% endif %}
+                              </p>
+                            </div>
                             <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
 
                             <!-- Title -->
@@ -498,18 +518,23 @@
                             {% endif %}
                             </h3>
                             <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
-                            <!-- Content -->
-                            {% if isChinese == "True" and fifth_section.subsection_3.chinese_content %}
-                            {{fifth_section.subsection_3.chinese_content}}
-                            {% else %}
-                            {{fifth_section.subsection_3.content}}
-                            {% endif %}
+
                             </p></div>
                         </div>
                         <!-- end feature box -->
                         <!-- feature box -->
-                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom">
-                            <div class="margin-fifteen-bottom sm-margin-ten-bottom"><img src="{{fifth_section.subsection_4.image.image.url}}" data-img-size="(W)132px X (H)132px" alt=""></div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 text-center sm-margin-nine-bottom xs-margin-nineteen-bottom par_div">
+                            <div class="margin-fifteen-bottom sm-margin-ten-bottom fifteen_div">
+                              <img src="{{fifth_section.subsection_4.image.image.url}}" data-img-size="(W)132px X (H)132px" alt="">
+                              <p>
+                                <!-- Content -->
+                                {% if isChinese == "True" and fifth_section.subsection_4.chinese_content %}
+                                {{fifth_section.subsection_4.chinese_content |truncatechars:319 }}
+                                {% else %}
+                                {{fifth_section.subsection_4.content|truncatechars:319}}
+                                {% endif %}
+                              </p>
+                            </div>
                             <h3 class="text-medium sm-title-small text-red alt-font margin-five-bottom xs-margin-three-bottom display-block tz-text">
                             <!-- Title -->
                             {% if isChinese == "True" and fifth_section.subsection_4.chinese_title %}
@@ -519,12 +544,7 @@
                             {% endif %}
                             </h3>
                             <div class="text-medium width-90 center-col tz-text"> <p class="no-margin-bottom">
-                            <!-- Content -->
-                            {% if isChinese == "True" and fifth_section.subsection_4.chinese_content %}
-                            {{fifth_section.subsection_4.chinese_content}}
-                            {% else %}
-                            {{fifth_section.subsection_4.content}}
-                            {% endif %}
+
                             </p></div>
                         </div>
                         <!-- end feature box -->
@@ -553,7 +573,7 @@
 
                             <!-- Sixth Section Content -->
                             {% if isChinese == "True" and sixth_section.subsection.chinese_content %}
-                            {{sixth_section.subsection.chinese_content}}}
+                            {{sixth_section.subsection.chinese_content}}
                             {% else %}
                             {{sixth_section.subsection.content}}
                             {% endif %}
