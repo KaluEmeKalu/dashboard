@@ -746,3 +746,26 @@ var wow = new WOW({
     live: true
 });
 wow.init();
+
+/*==============================================================
+ Kalu Code 
+ ==============================================================*/
+
+
+// - Adding Faculty Read More Feature
+$("body").on("click",".owl-wrapper>.owl-item",function(){
+    var That = this, Index = $(That).index();
+    if($(this).hasClass("curr")){
+        $(That).removeClass("curr");
+        $(".GF_icon").css("opacity","0")
+        $(".GFInfo>li").slideUp();
+    }
+    else {
+        $(That).addClass("curr").siblings().removeClass("curr");
+        $(".GF_icon").css("opacity","0")
+        $(That).find(".GF_icon").css("opacity","1");
+        $(".GFInfo>li").slideUp();
+        $(".GFInfo>li").eq(Index).slideDown();
+
+    }
+})

@@ -676,10 +676,10 @@
                         </div>
                     </div>
                     <!-- end section title -->
-                </div>                    
+                </div>       
+                <!-- Team Members Start  -->
                 <div class="row">
                     <div class="testimonial-style3 owl-carousel owl-theme black-pagination owl-dark-pagination owl-pagination-bottom">
-
 
                         {% for faculty_member in ninth_section.faculty.all %}
                         <!-- team member -->
@@ -687,31 +687,53 @@
                             <div class="team col-md-12 col-sm-12 col-xs-12 clear-both">
                                 <!-- team image -->
                                 <div class="team-img position-relative overflow-hidden">
-                                    <img class="xs-width-100" src="{{faculty_member.profile_pic.image.url}}" data-img-size="(W)600px X (H)600px" id="tz-bg-41" alt=""/>
+                                    <img class="xs-width-100" src="{{faculty_member.profile_pic.image.url}}"(W)300px X (H)200px" id="tz-bg-41" alt=""/>
                                 </div>
                                 <!-- end team image -->
                                 <!-- team details -->
                                 <div class="team-details bg-light-gray tz-background-color text-center">
                                     <span class="text-extra-large alt-font text-dark-gray display-block padding-eight-bottom tz-text" id="tz-slider-text112">{{faculty_member.user.first_name}} {{faculty_member.user.last_name}}</span>
                                     <span class="text-small tz-text" id="tz-slider-text119">
-                                        {% if isChinese == "True" and faculty_member.chinese_job_title %}
-                                            {{faculty_member.chinese_job_title}}
-                                        {% else %}
-                                            {{faculty_member.job_title}}
-                                        {% endif %}
-                                     </span>
+                                      {% if isChinese == "True" and faculty_member.chinese_job_title %}
+                                          {{faculty_member.chinese_job_title}}
+                                      {% else %}
+                                          {{faculty_member.job_title}}
+                                      {% endif %}
+                                    </span>
                                     <div class="padding-sixteen-bottom margin-sixteen-top no-padding-lr border-top tz-border">
                                     </div>
-                                    <a href="{{faculty_member.get_absolute_url| what_language:isChinese}}" class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">Read More</span></a>
+                                    <a class="btn-small btn bg-red text-white" id="tz-slider-text115"><span class="tz-text" id="tz-btn-24">Read More</span></a>
+                                    <span class="GF_icon"><img src="images/team_ico1.png" alt=""></span>
                                 </div>
                                 <!-- end team details -->
-                            </div>                            
+                            </div>
                         </div>
                         <!-- end team member -->
                         {% endfor %}
 
                     </div>
+
+                    <!-- Faculty Read More Info -->
+                    <ul class="GFInfo">
+
+                        {% for faculty_member in ninth_section.faculty.all %}
+                        <li>
+                            <p>
+                              {% if isChinese %}
+                                {% if faculty_member.chinese_faculty_profile %}
+                                  {{faculty_member.chinese_faculty_profile | linebreaks}}
+                                {% endif %}
+                              {% else %}
+                                {% if faculty_member.faculty_profile %}
+                                  {{faculty_member.faculty_profile | linebreaks}}
+                                {% endif %}
+                              {% endif %}
+                            </p>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
+                <!-- Team Members End  -->
             </div>
         </section>
         <!-- End Ninth Section -->

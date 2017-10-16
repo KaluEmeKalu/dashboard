@@ -1363,7 +1363,9 @@ figure:hover img { cursor: url("../images/icon/icon-zoom-white.png"), pointer; o
 ====================================== */
 
 
-
+/* Adding Reveal Image Text on Hover for
+    For Section 5
+*/
 .fifteen_div {
     position: relative;
 }
@@ -1394,4 +1396,34 @@ figure:hover img { cursor: url("../images/icon/icon-zoom-white.png"), pointer; o
 }
 .par_div:nth-child(even) .fifteen_div:hover p {
     opacity: 1;
+}
+
+/* Faculty Section */
+
+.GFInfo li{
+    transition-duration: 0s;
+    -webkit-transition: all 0s;
+    transition: all 0s;
+    overflow: hidden;
+    display: none;
+    background: #181818;
+    width: 90%;
+    height: 100px;
+    color: #fff;
+    padding: 10px;
+}
+
+.GF_icon{
+    transition-duration: 0s;
+    -webkit-transition: all .9s;
+    transition: all .9s;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    opacity: 0;
+}
+.GFInfo{list-style:none;width: 100%;height: auto;}
+/**/
+.owl-item{
+    width :300px !important;
 }
