@@ -16,10 +16,19 @@ from . models import (
     Footer,
     UniversitySection,
     MailingListEntry,
-    UserProfile
+    UserProfile,
+    VideoEmbed
 )
 from dashboard.models import Article, Text
 from django.shortcuts import get_object_or_404
+
+
+def video_list(request, isChinese=None):
+    embedd_videos = VideoEmbed.objects.all()
+
+    context = {'videos': embedd_videos, 'isChinese': isChinese}
+    return render(request, 'frontpage/videos.html', context)
+
 
 def blog_list(request, isChinese=None):
     blogs = Article.objects.all()

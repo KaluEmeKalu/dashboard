@@ -9,7 +9,9 @@ urlpatterns = [
 
     url(r'^$', views.index, {'isChinese': 'True'}, name="index"),
     url(r'^eng/$', views.index, name="zh_index"),
-    url(r'^blogs/$', views. blog_list, {'isChinese': 'True'}, name="blog"),
+    url(r'^blogs/$', views.blog_list, {'isChinese': 'True'}, name="blog"),
+    url(r'^videos/$', views.video_list, {'isChinese': 'True'}, name="videos"),
+    url(r'^videos/eng/$', views.video_list, name="eng_videos"),
     url(r'^blogs/eng/$', views.blog_list, name="eng_blog"),
     url(r'^blogs/(?P<slug>[-\w]*)/$', views.blog_detail,
         {'isChinese': 'True'}, name="blog_detail"),

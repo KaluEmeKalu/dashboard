@@ -769,3 +769,22 @@ $("body").on("click",".owl-wrapper>.owl-item",function(){
 
     }
 })
+
+// Adding Video Modal
+function onClickVideo(event) {
+
+    // Get Embed URL
+    var embed_url = $(event).data('url');
+
+    // Get Video Title
+    var video_title = $(event).data('title');
+
+    // Insert Embed Link to Modal Body HTML
+    $('.myModalBody').html(embed_url);
+
+    // Insert Video Title to Modal Title Div
+    $('.myModalTitle').html(video_title);
+
+
+
+}

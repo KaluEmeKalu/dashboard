@@ -149,6 +149,11 @@ class UserProfile(TimeStampBaseModel):
         super().save(*args, **kwargs)
 
 
+class VideoEmbed(NameTimeStampBaseModel):
+    embed_url = TextField(null=True, blank=True)
+    user = ForeignKey(User, null=True, blank=True)
+    video_image = ForeignKey(
+        'Image', related_name="video_images", null=True, blank=True)
 
 
 class Video(NameTimeStampBaseModel):

@@ -27,8 +27,14 @@ from . models import (
     Article,
     Text,
     UniversitySection,
-    MailingListEntry
+    MailingListEntry,
+    VideoEmbed,
 )
+
+
+class VideoEmbedAdmin(admin.ModelAdmin):
+    list_display = ['name', 'timestamp', 'embed_url']
+
 
 class MailingListEntryAdmin(admin.ModelAdmin):
     list_display = ['email', 'name']
@@ -167,3 +173,4 @@ admin.site.register(FirstSection, FirstSectionAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Subsection, SubsectionAdmin)
 admin.site.register(FourthSection, FourthSectionAdmin)
+admin.site.register(VideoEmbed, VideoEmbedAdmin)

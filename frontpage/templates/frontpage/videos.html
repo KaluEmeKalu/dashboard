@@ -1,0 +1,73 @@
+{% extends 'frontpage/blank_page_base.html' %}
+{% load static %}
+
+
+{% block blank_page_section %}
+<!--video GF-->
+<section class="padding-110px-tb xs-padding-60px-tb bg-white builder-bg" id="content-section22">
+	<div class="container">
+		<div class="row equalize sm-equalize-auto">
+			<!-- section title -->
+			<div class="row">
+
+				{% for video in videos %}
+				<div class="GF_video xs-width-100 col-md-3" style="position: relative;margin-top: 20px">
+					<a onclick="onClickVideo(this)" data-title="{{video.name}}" data-url="{{video.embed_url}}" data-toggle="modal" data-target="#myModal" >
+						<div class="oic_video_pic">
+
+							<!-- Display Video Image -->
+							{% if video.video_image.image %}
+								<img src="{{ video.video_image.image.url }}" class="xs-width-100">
+							{% else %}
+								<img src="http://placehold.it/500x400" class="xs-width-100">
+							{% endif %}	
+							<!-- End Display Video IMage -->
+
+							<!-- Display Play Icon -->
+							<div class="n_oic_bg">
+								<img src="{% static 'frontpage/images/ico_video.png' %}"  class="ico_video3">
+								<img src="{% static 'frontpage/images/ico_videos.png' %}"  class="ico_video4">
+							</div>
+							<!-- End Display Play Icon -->
+
+						</div>
+						<div class="oic_video_pp">
+							<p>
+								{{video.user.first_name}} {{video.user.last_name}} 
+								<i>{{video.time_ago}}</i>
+							</p>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+
+			</div>
+
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title myModalTitle" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body myModalBody">
+		        
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	</div>
+
+</section>
+<!--video end GF-->
+
+{% endblock blank_page_section %}
+
+
