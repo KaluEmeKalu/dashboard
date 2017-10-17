@@ -1473,3 +1473,7 @@ figure:hover img { cursor: url("../images/icon/icon-zoom-white.png"), pointer; o
 .oic_video_pic:hover .n_oic_bg .ico_video3 { transition: 400ms; left: 50%; opacity: 1; margin-left: -32px; }
 .oic_video_pic:hover .n_oic_bg .ico_video4 { transition: 400ms; left: 50%; opacity: 1; margin-left: -45px; }
 
+/*Make Faculty Pic Size Smaller*/
+.small_owl_item .owl-item{
+    width :300px !important;
+}
